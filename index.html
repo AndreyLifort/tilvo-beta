@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="only light">
+  <title>ChatGPT и Claude без VPN бесплатно — закрытый бета-тест Тилво</title>
+  <meta name="description" content="Закрытый бета-тест Тилво: 30 мест. GPT и Claude на русском — вопросы текстом и голосом, фото, документы и генерация изображений, без VPN и зарубежной карты. Вход по коду приглашения через Яндекс ID или VK ID.">
+  <link rel="canonical" href="https://andreylifort.github.io/tilvo-beta/">
+  <!-- ВРЕМЕННО: сайт закрыт от индексации до запуска. При открытии убрать эту строку,
+       заголовок X-Robots-Tag в Caddyfile и поправить robots.txt. -->
+  <meta name="robots" content="noindex, nofollow, noarchive">
+
+  <!-- Open Graph: превью ссылки в посте блогера совпадает с первым экраном -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:site_name" content="Тилво">
+  <meta property="og:url" content="https://andreylifort.github.io/tilvo-beta/">
+  <meta property="og:title" content="GPT и Claude бесплатно — ищем 30 бета-тестеров">
+  <meta property="og:description" content="Ищем 30 бета-тестеров. На русском, без VPN и зарубежной карты. Вход по коду приглашения через Яндекс ID или VK ID.">
+  <meta property="og:image" content="https://andreylifort.github.io/tilvo-beta/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Тилво — закрытый бета-тест">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Значение подставляется из CSS-переменной --bg в main.js, чтобы палитра жила в одном месте -->
+  <meta name="theme-color" content="">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <!-- Единственный внешний ресурс: Google Fonts (кириллица) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&amp;family=Literata:opsz,wght@7..72,400..600&amp;display=swap&amp;subset=cyrillic" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
+
+  <header class="site-header">
+    <div class="container header-bar">
+      <a class="brand" href="#top">
+        <img class="brand-mark" src="assets/logo.svg" alt="" width="28" height="28">
+        <span class="brand-word">Тилво</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Основная навигация">
+        <ul>
+          <li><a href="#models">Нейросети</a></li>
+          <li><a href="#pricing">Что входит</a></li>
+          <li><a href="#faq">Вопросы</a></li>
+        </ul>
+      </nav>
+
+      <a class="btn btn-primary btn-sm header-cta" href="#invite" data-action="apply" data-hide-when-full>Получить код</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- 1. Первый экран -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+
+        <div class="hero-copy">
+          <p class="beta-pill">
+            <span class="beta-pill-dot" aria-hidden="true"></span>
+            <span data-seats-pill>Закрытый бета-тест · <span class="nowrap">Осталось <b data-seats-left>12</b> из&nbsp;30&nbsp;мест</span></span>
+          </p>
+          <h1 id="hero-title">GPT и&nbsp;Claude бесплатно&nbsp;— ищем <span class="mark">30 <span class="nowrap">бета-тестеров</span></span></h1>
+          <p class="lead">Тилво&nbsp;— новый помощник на&nbsp;русском. Спрашивайте текстом или голосом, присылайте фото и&nbsp;документы, создавайте изображения&nbsp;— без VPN и&nbsp;зарубежной карты. До&nbsp;запуска открываем его 30&nbsp;людям&nbsp;— бесплатно. Взамен просим только честные отзывы.</p>
+
+          <!-- Блок приглашения. Состояния переключает main.js; без JS виден первый.
+               Лендинг не собирает учётные данные — авторизация на chat.tilvo.ru -->
+          <section class="signin invite" id="invite" aria-labelledby="invite-title">
+            <h2 class="signin-title" id="invite-title">Вход в&nbsp;бета-тест</h2>
+
+            <div class="invite-state" data-state="start">
+              <button class="btn btn-primary invite-main" type="button" data-action="apply">Получить код</button>
+              <p class="invite-note">Оставьте почту и&nbsp;телефон&nbsp;— пришлём код приглашения. Вход&nbsp;— через Яндекс&nbsp;ID или VK&nbsp;ID, без карты и&nbsp;пароля.</p>
+              <p class="signin-alt"><button class="link-btn" type="button" data-action="have">У&nbsp;меня уже есть код</button></p>
+            </div>
+
+            <!-- Заявка на бета-тест: код присылает команда. Куда уходит заявка — BETA.applyUrl в main.js -->
+            <form class="invite-state invite-form" data-state="apply" hidden novalidate>
+              <label class="invite-label" for="apply-email">Почта</label>
+              <input class="invite-input" id="apply-email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="name@mail.ru">
+              <label class="invite-label" for="apply-phone">Телефон</label>
+              <input class="invite-input" id="apply-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="+7 900 000-00-00">
+              <label class="invite-consent">
+                <input type="checkbox" name="consent" required>
+                <span>Согласен на&nbsp;<a href="legal/consent.html">обработку персональных данных</a></span>
+              </label>
+              <p class="invite-error" role="alert" hidden></p>
+              <button class="btn btn-primary invite-main" type="submit">Отправить заявку</button>
+              <p class="invite-note">Пришлём код на&nbsp;почту, когда одобрим заявку. Телефон&nbsp;— только для связи по&nbsp;заявке: не&nbsp;звоним с&nbsp;рекламой и&nbsp;не&nbsp;делаем рассылок.</p>
+              <p class="signin-alt"><button class="link-btn" type="button" data-action="have">У&nbsp;меня уже есть код</button></p>
+            </form>
+
+            <div class="invite-state" data-state="sent" hidden>
+              <p class="invite-full">Заявка отправлена</p>
+              <p class="invite-note">Пришлём код приглашения на&nbsp;<b data-sent-email></b>, когда одобрим заявку. Если письма нет&nbsp;— проверьте папку «Спам».</p>
+              <p class="signin-alt"><button class="link-btn" type="button" data-action="have">Код пришёл&nbsp;— ввести</button></p>
+            </div>
+
+            <div class="invite-state" data-state="have" hidden>
+              <label class="invite-label" for="invite-input">Код приглашения</label>
+              <input class="invite-input invite-input-code" id="invite-input" type="text" autocomplete="off" spellcheck="false" maxlength="32" placeholder="Код из письма" aria-describedby="invite-hint">
+              <ul class="signin-list">
+                <li>
+                  <a class="btn btn-provider is-disabled" aria-disabled="true" data-provider="yandex">
+                    <span>Войти через Яндекс&nbsp;ID</span>
+                    <svg class="icon-arrow" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5.5 15.5 10 11 14.5"/></svg>
+                  </a>
+                </li>
+                <li>
+                  <a class="btn btn-provider is-disabled" aria-disabled="true" data-provider="vk">
+                    <span>Войти через VK&nbsp;ID</span>
+                    <svg class="icon-arrow" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5.5 15.5 10 11 14.5"/></svg>
+                  </a>
+                </li>
+              </ul>
+              <p class="invite-note" id="invite-hint">Сначала введите код&nbsp;— тогда кнопки станут активны</p>
+              <p class="signin-alt">Нет кода? <button class="link-btn" type="button" data-action="apply">Оставить заявку</button></p>
+            </div>
+
+            <div class="invite-state" data-state="full" hidden>
+              <p class="invite-full">Все 30&nbsp;мест заняты</p>
+              <p class="invite-note">Набор в&nbsp;бета-тест закрыт. После беты Тилво откроется для всех&nbsp;— загляните сюда позже.</p>
+            </div>
+
+            <p class="visually-hidden" aria-live="polite" data-live></p>
+          </section>
+
+          <ul class="hero-facts">
+            <li>Без карты</li>
+            <li>Без VPN</li>
+            <li>Ничего не&nbsp;скачивать</li>
+          </ul>
+
+          <!-- TODO: legal/beta.html — документ «Условия бета-теста» от юриста -->
+          <p class="fineprint">Продолжая, вы принимаете <a href="legal/beta.html">условия бета-теста</a> и&nbsp;<a href="legal/privacy.html">политику конфиденциальности</a>.</p>
+        </div>
+
+        <!-- Иллюстрация продукта: окно с диалогом + генеративные контуры на фоне -->
+        <div class="hero-visual" id="demo">
+          <canvas class="contours" aria-hidden="true"></canvas>
+
+          <div class="demo-window">
+            <div id="demo-window" role="img" aria-label="Пример диалога в Тилво: пользователь просит объяснить анализ крови, ассистент отвечает простыми словами.">
+            <div class="demo-bar" aria-hidden="true">
+              <span class="demo-brand">
+                <img src="assets/logo.svg" alt="" width="20" height="20">
+                <span>Тилво</span>
+              </span>
+              <span class="badge demo-beta">бета-версия</span>
+            </div>
+
+            <!-- Статичное содержимое = первый сценарий (видно без JS и при reduced motion) -->
+            <div class="demo-body" aria-hidden="true">
+              <div class="msg msg-user is-in">
+                <p data-demo="user-text">Что значит повышенная СОЭ в&nbsp;анализе крови мамы? Объясни простыми словами.</p>
+                <span class="attach" data-demo="attach" hidden></span>
+              </div>
+              <div class="msg msg-bot is-in is-done">
+                <img class="bot-mark" src="assets/logo.svg" alt="" width="24" height="24">
+                <p class="bot-text"><span class="dots"><i></i><i></i><i></i></span><span class="typed" data-demo="typed">СОЭ — скорость, с которой оседают клетки крови. Если она выше нормы, чаще всего в организме идёт воспаление: например, после простуды. С возрастом СОЭ тоже немного растёт.
+
+По одной цифре диагноз не ставят. Покажите анализ терапевту — он сравнит его с другими показателями и самочувствием мамы.</span><span class="rest" data-demo="rest"></span></p>
+              </div>
+            </div>
+
+            </div>
+
+            <!-- Выглядит как поле ввода; в бете ведёт к блоку приглашения -->
+            <a class="demo-composer" href="#invite" data-to-invite aria-label="Перейти ко входу в бета-тест">
+              <span class="demo-placeholder" aria-hidden="true">Спросите текстом или голосом…</span>
+              <span class="demo-tools" aria-hidden="true">
+                <span class="demo-mic">
+                  <svg viewBox="0 0 20 20" width="18" height="18" focusable="false"><path d="M10 3a2.5 2.5 0 0 0-2.5 2.5V10a2.5 2.5 0 0 0 5 0V5.5A2.5 2.5 0 0 0 10 3zM5 9.5a5 5 0 0 0 10 0M10 14.5V17"/></svg>
+                </span>
+                <span class="demo-send">
+                  <svg viewBox="0 0 20 20" width="16" height="16" focusable="false"><path d="M10 16V5M5.5 9.5 10 5l4.5 4.5"/></svg>
+                </span>
+              </span>
+            </a>
+          </div>
+
+          <!-- Управление иллюстрацией появляется только при работающем JS -->
+          <div class="demo-controls" hidden>
+            <div class="demo-chips" role="group" aria-label="Примеры вопросов в иллюстрации"></div>
+            <button class="demo-pause" type="button" aria-label="Остановить анимацию">
+              <span class="demo-pause-icon" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 2. Почему бесплатно и почему 30 -->
+    <section class="section" id="why" aria-labelledby="why-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow">Закрытый бета-тест</p>
+          <h2 id="why-title">Почему бесплатно и&nbsp;почему мест всего&nbsp;30</h2>
+        </header>
+
+        <ul class="cards slider" data-slider>
+          <li class="card">
+            <div class="card-top">
+              <span class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="24" height="24" focusable="false"><path d="M12 3.5a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zM12 7.5V12l3 2"/></svg>
+              </span>
+              <span class="badge badge-soon">Почему бесплатно</span>
+            </div>
+            <h3>Мы ещё не&nbsp;запустились</h3>
+            <p>Прежде чем открыть Тилво всем, проверяем его на&nbsp;настоящих вопросах. Ваши вопросы и&nbsp;честные отзывы&nbsp;— вот и&nbsp;вся плата за&nbsp;доступ.</p>
+          </li>
+
+          <li class="card">
+            <div class="card-top">
+              <span class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="24" height="24" focusable="false"><path d="M12 3.5a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zM14.5 9.25c-.4-.9-1.35-1.5-2.5-1.5-1.5 0-2.5.8-2.5 1.9 0 2.7 5 1.4 5 4.2 0 1.1-1.1 1.9-2.5 1.9-1.2 0-2.2-.6-2.6-1.5M12 6.25v1.5M12 15.75v1.5"/></svg>
+              </span>
+              <span class="badge badge-soon">Почему 30 мест</span>
+            </div>
+            <h3>Каждый ответ стоит нам денег</h3>
+            <p>За&nbsp;каждый ответ мы платим OpenAI и&nbsp;Anthropic из&nbsp;своего кармана. И&nbsp;хотим лично выслушать каждого тестера, а&nbsp;не&nbsp;утонуть в&nbsp;тысячах отзывов.</p>
+          </li>
+
+          <li class="card">
+            <div class="card-top">
+              <span class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="24" height="24" focusable="false"><path d="M12 3.5l2.4 5.1 5.6.6-4.2 3.8 1.2 5.5L12 15.7l-5 2.8 1.2-5.5L4 9.2l5.6-.6z"/></svg>
+              </span>
+              <span class="badge badge-live">Что вам это даёт</span>
+            </div>
+            <h3>Тилво подстроится под&nbsp;вас</h3>
+            <p>Тестеры пишут команде напрямую. Чего не&nbsp;хватит вам, доделаем в&nbsp;первую очередь, а&nbsp;новые возможности вы увидите раньше всех.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 3. Что спросить -->
+    <section class="section section-band" id="ask" aria-labelledby="ask-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow">Что спросить</p>
+          <h2 id="ask-title">Проверьте на&nbsp;том, что нужно вам</h2>
+          <p class="section-lead">Пишите или говорите своими словами&nbsp;— как в&nbsp;мессенджере.</p>
+        </header>
+
+        <ul class="asks slider" data-slider>
+          <li>
+            <a class="ask" href="#invite" data-to-invite>
+              <span class="ask-topic">Здоровье</span>
+              <span class="ask-text">«Объясни простыми словами, что значат эти показатели в&nbsp;анализе крови мамы»</span>
+              <span class="ask-note">Нейросеть объясняет, но&nbsp;не&nbsp;ставит диагноз. Решения о&nbsp;лечении&nbsp;— с&nbsp;врачом.</span>
+            </a>
+          </li>
+          <li>
+            <a class="ask" href="#invite" data-to-invite>
+              <span class="ask-topic">Покупки</span>
+              <span class="ask-text">«Сравни три предложения по&nbsp;пластиковым окнам: что выгоднее и&nbsp;о&nbsp;чём спросить замерщика»</span>
+            </a>
+          </li>
+          <li>
+            <a class="ask" href="#invite" data-to-invite>
+              <span class="ask-topic">Письма и&nbsp;претензии</span>
+              <span class="ask-text">«Составь претензию в&nbsp;магазин: чайник сломался через неделю, хочу вернуть деньги»</span>
+            </a>
+          </li>
+          <li>
+            <a class="ask" href="#invite" data-to-invite>
+              <span class="ask-topic">Фото и&nbsp;документы</span>
+              <span class="ask-text">«Вот фото квитанции за&nbsp;ЖКХ&nbsp;— объясни, почему сумма выросла»</span>
+            </a>
+          </li>
+          <li>
+            <a class="ask" href="#invite" data-to-invite>
+              <span class="ask-topic">Уроки с&nbsp;детьми</span>
+              <span class="ask-text">«Объясни пятикласснику дроби&nbsp;— но&nbsp;не&nbsp;решай задачу за&nbsp;него»</span>
+            </a>
+          </li>
+          <li>
+            <a class="ask" href="#invite" data-to-invite>
+              <span class="ask-topic">Генерация изображений</span>
+              <span class="ask-text">«Создай открытку сестре к&nbsp;юбилею&nbsp;— с&nbsp;цветами и&nbsp;тёплой подписью»</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 4. На чём работает Тилво -->
+    <section class="section" id="models" aria-labelledby="models-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow">На&nbsp;чём работает Тилво</p>
+          <h2 id="models-title">Две самые передовые нейросети мира&nbsp;— в&nbsp;одном окне</h2>
+          <p class="section-lead">GPT от&nbsp;OpenAI и&nbsp;Claude от&nbsp;Anthropic&nbsp;— нейросети, которыми пользуются сотни миллионов людей по&nbsp;всему миру. В&nbsp;Тилво обе отвечают на&nbsp;русском, без VPN и&nbsp;зарубежной карты.</p>
+        </header>
+
+        <ul class="cards slider" data-slider>
+          <li class="card">
+            <div class="card-top">
+              <span class="card-icon is-logo is-openai" aria-hidden="true">
+                <svg class="brand-logo" viewBox="0 0 24 24" width="26" height="26" focusable="false"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg>
+              </span>
+            </div>
+            <h3>GPT от&nbsp;OpenAI</h3>
+            <p>Нейросеть, на&nbsp;которой работает ChatGPT. Отвечает на&nbsp;вопросы, ищет в&nbsp;интернете, создаёт изображения.</p>
+          </li>
+
+          <li class="card">
+            <div class="card-top">
+              <span class="card-icon is-logo is-claude" aria-hidden="true">
+                <svg class="brand-logo" viewBox="0 0 24 24" width="26" height="26" focusable="false"><path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></svg>
+              </span>
+            </div>
+            <h3>Claude от&nbsp;Anthropic</h3>
+            <p>Сильна в&nbsp;длинных текстах, документах и&nbsp;точных формулировках.</p>
+          </li>
+
+          <li class="card">
+            <div class="card-top">
+              <span class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="24" height="24" focusable="false"><path d="M4 12h5l4-5h7M9 12l4 5h7M17 4.5 20 7l-3 2.5M17 14.5l3 2.5-3 2.5"/></svg>
+              </span>
+            </div>
+            <h3>Выбирать не&nbsp;нужно</h3>
+            <p>Тилво оценивает, насколько сложный вопрос, и&nbsp;сам подбирает самую эффективную нейросеть для ответа.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 5. Что входит: бесплатно для бета-тестеров, тарифы — в раскрывающемся блоке.
+         Карточки тарифов рендерятся из объекта PLANS в main.js -->
+    <section class="section section-band" id="pricing" aria-labelledby="pricing-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow">Что входит</p>
+          <h2 id="pricing-title">Бета-тестерам&nbsp;— бесплатно</h2>
+          <p class="section-lead">Без карты и&nbsp;подписки, с&nbsp;первого дня.</p>
+        </header>
+
+        <!-- TODO: лимит изображений в бесплатном тарифе беты — подтвердить -->
+        <div class="beta-free">
+          <div class="beta-free-head">
+            <span class="badge plan-tag">Для бета-тестеров</span>
+            <p class="beta-free-price">Бесплатно</p>
+            <p class="plan-note">GPT и&nbsp;Claude на&nbsp;русском&nbsp;— для обычных задач каждый день.</p>
+            <button class="btn btn-primary" type="button" data-action="apply" data-hide-when-full>Получить код</button>
+          </div>
+          <ul class="plan-features">
+            <li>20&nbsp;запросов в&nbsp;месяц&nbsp;— для обычных задач этого хватает с&nbsp;запасом</li>
+            <li>Вопросы текстом и&nbsp;голосом, поиск в&nbsp;интернете</li>
+            <li>Анализ фото и&nbsp;документов</li>
+            <li>Генерация изображений&nbsp;— 5&nbsp;в&nbsp;месяц</li>
+            <li><strong>Скидка 20% на&nbsp;будущие тарифы&nbsp;— навсегда</strong></li>
+            <li class="is-off">Глубокие исследования&nbsp;— в&nbsp;тарифах ниже</li>
+          </ul>
+        </div>
+
+        <details class="faq-item more-plans">
+          <summary><span>Нужно ещё больше запросов для работы и&nbsp;тестирования?<span class="more-plans-sub">Тарифы для бета-тестеров&nbsp;— со&nbsp;скидкой 20% навсегда</span></span><span class="faq-icon" aria-hidden="true"></span></summary>
+          <ul class="plans plans-2" id="plans"></ul>
+          <noscript><p class="plans-fallback">«Лёгкий»&nbsp;— 199&nbsp;₽ вместо 249&nbsp;₽, «Старт»&nbsp;— 490&nbsp;₽ вместо 613&nbsp;₽ в&nbsp;месяц: скидка 20% для бета-тестеров.</p></noscript>
+        </details>
+
+        <p class="plans-note"><strong>Почему больше&nbsp;— за&nbsp;деньги.</strong> 20&nbsp;запросов в&nbsp;месяц мы оплачиваем сами&nbsp;— для обычных задач этого хватает с&nbsp;запасом. Если нужно больше, тариф покрывает наши расходы на&nbsp;нейросети. Оплата в&nbsp;рублях по&nbsp;QR-коду, без автосписаний.</p>
+      </div>
+    </section>
+
+    <!-- 6. Условия беты -->
+    <section class="section" id="deal" aria-labelledby="deal-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow">Условия беты</p>
+          <h2 id="deal-title">Честный обмен</h2>
+        </header>
+
+        <ul class="plans deal">
+          <li class="plan is-featured">
+            <div class="plan-head">
+              <h3>Вы получаете</h3>
+              <span class="badge plan-tag">Бета-тестерам</span>
+            </div>
+            <ul class="plan-features">
+              <li>GPT и&nbsp;Claude бесплатно&nbsp;— вопросы, фото, документы и&nbsp;генерация изображений</li>
+              <li>Скидку 20% на&nbsp;будущие тарифы&nbsp;— навсегда</li>
+              <li>Вход через Яндекс&nbsp;ID или VK&nbsp;ID&nbsp;— без VPN, карты и&nbsp;СМС</li>
+              <li>Прямую связь с&nbsp;командой: ваши пожелания попадут в&nbsp;Тилво первыми</li>
+            </ul>
+          </li>
+          <li class="plan">
+            <div class="plan-head">
+              <h3>Мы просим</h3>
+            </div>
+            <ul class="plan-features">
+              <li>Спрашивать, когда есть вопрос,&nbsp;— хотя&nbsp;бы пару раз в&nbsp;неделю</li>
+              <li>Отмечать ответы 👍 или 👎&nbsp;— одно касание</li>
+              <li>Иногда отвечать на&nbsp;короткий вопрос в&nbsp;чате&nbsp;— минута</li>
+              <li>По&nbsp;желанию&nbsp;— созвон на&nbsp;15&nbsp;минут: расскажете, чего не&nbsp;хватило</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 7. Как попасть: два шага до беты, дальше — вопросы -->
+    <section class="section section-band" id="steps" aria-labelledby="steps-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow">Как попасть</p>
+          <h2 id="steps-title">Два шага&nbsp;— и&nbsp;вы в&nbsp;бете</h2>
+        </header>
+
+        <ol class="ladder">
+          <li class="ladder-step">
+            <span class="ladder-dot" aria-hidden="true">1</span>
+            <div class="ladder-text">
+              <h3>Оставьте заявку</h3>
+              <ul class="ladder-chips" aria-label="Что указать">
+                <li>Почта</li>
+                <li>Телефон</li>
+              </ul>
+              <p class="ladder-after"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><path d="M3.5 5.5h13v9h-13zM3.5 6l6.5 5 6.5-5"/></svg>Код придёт на&nbsp;почту</p>
+            </div>
+          </li>
+          <li class="ladder-step">
+            <span class="ladder-dot" aria-hidden="true">2</span>
+            <div class="ladder-text">
+              <h3>Войдите по&nbsp;коду</h3>
+              <ul class="ladder-chips" aria-label="Чем войти">
+                <li>Яндекс&nbsp;ID</li>
+                <li>VK&nbsp;ID</li>
+              </ul>
+            </div>
+          </li>
+          <li class="ladder-step is-milestone">
+            <span class="ladder-dot" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="m6 12.5 4 4 8-9"/></svg></span>
+            <div class="ladder-text">
+              <h3>Вы в&nbsp;бете</h3>
+              <p class="ladder-sub">Бесплатно, без карты и&nbsp;VPN</p>
+            </div>
+          </li>
+          <li class="ladder-step">
+            <span class="ladder-dot" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M5 6.5A2.5 2.5 0 0 1 7.5 4h9A2.5 2.5 0 0 1 19 6.5v6a2.5 2.5 0 0 1-2.5 2.5H11l-4 3.5V15a2.5 2.5 0 0 1-2-2.5z"/></svg></span>
+            <div class="ladder-text">
+              <h3>Задавайте вопросы</h3>
+              <ul class="ladder-chips" aria-label="Как спросить">
+                <li>Текстом</li>
+                <li>Голосом</li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+
+        <div class="ladder-actions">
+          <button class="btn btn-primary" type="button" data-action="apply" data-hide-when-full>Получить код</button>
+        </div>
+
+        <p class="beta-note"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M12 3.5a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zM12 11v5.5M12 7.75v.5"/></svg><span><strong>Это бета-версия.</strong> Что-то может работать неидеально. Нашли ошибку&nbsp;— напишите в&nbsp;<a href="https://max.ru/" data-max-link>Max</a>: <span class="nowrap">+7&nbsp;916&nbsp;611-30-50</span>, поправим.</span></p>
+      </div>
+    </section>
+
+    <!-- 8. Вопросы -->
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="container faq-grid">
+        <header class="section-head">
+          <p class="eyebrow">Вопросы</p>
+          <h2 id="faq-title">Коротко о&nbsp;главном</h2>
+          <!-- TODO: заменить ссылку на чат поддержки Тилво в Max -->
+          <p class="section-lead">Не&nbsp;нашли ответ? Напишите нам в&nbsp;<a href="https://max.ru/" data-max-link>Max</a>: <span class="nowrap">+7&nbsp;916&nbsp;611-30-50</span>, или на&nbsp;почту <a href="mailto:tilvo@yandex.ru">tilvo@yandex.ru</a>.</p>
+        </header>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary><span>Это правда бесплатно? Где подвох?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-answer">
+              <p>Да. Бета-тестерам Тилво бесплатен: вопросы, фото, документы и&nbsp;генерация изображений. Подвоха нет: нам нужны ваши отзывы до&nbsp;запуска, а&nbsp;карту мы не&nbsp;просим. Бесплатно&nbsp;— 20&nbsp;запросов в&nbsp;месяц: для обычных задач этого хватает с&nbsp;запасом. Нужно больше&nbsp;— можно взять тариф, но&nbsp;это ваш выбор.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary><span>Как получить код приглашения?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-answer">
+              <p>Нажмите «Получить код» и&nbsp;оставьте почту и&nbsp;телефон. Пришлём код на&nbsp;почту, когда одобрим заявку. Код уже есть&nbsp;— нажмите «У&nbsp;меня уже есть код».</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary><span>Это настоящий ChatGPT?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-answer">
+              <p>Да. Тилво работает на&nbsp;GPT от&nbsp;OpenAI&nbsp;— той&nbsp;же нейросети, что и&nbsp;ChatGPT,&nbsp;— и&nbsp;на&nbsp;Claude от&nbsp;Anthropic. Не&nbsp;аналог и&nbsp;не&nbsp;копия: мы сделали к&nbsp;ним простой вход из&nbsp;России.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary><span>Какая нейросеть ответит на&nbsp;мой вопрос?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-answer">
+              <p>Тилво оценивает, насколько сложный вопрос, и&nbsp;подбирает самую эффективную нейросеть&nbsp;— GPT от&nbsp;OpenAI или Claude от&nbsp;Anthropic. Выбирать ничего не&nbsp;нужно.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary><span>Что такое глубокое исследование?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-answer">
+              <p>Тилво сам прочитает десятки сайтов по&nbsp;вашей теме и&nbsp;соберёт подробный отчёт со&nbsp;ссылками на&nbsp;источники. Например, сравнит ипотечные программы банков или подберёт маршрут для отпуска с&nbsp;ценами. Глубокие исследования есть в&nbsp;тарифах «Лёгкий» и&nbsp;«Старт».</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary><span>Что будет, когда бета закончится?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-answer">
+              <p>Заранее напишем об&nbsp;этом в&nbsp;чате: что меняется и&nbsp;с&nbsp;какого дня. Решите сами, оставаться&nbsp;ли,&nbsp;— ничего не&nbsp;спишется без вашего решения. Скидка 20% на&nbsp;будущие тарифы остаётся за&nbsp;бета-тестерами навсегда.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary><span>Зачем вам почта и&nbsp;телефон?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-answer">
+              <p>На&nbsp;почту придёт код приглашения, а&nbsp;по&nbsp;телефону свяжемся, если с&nbsp;заявкой что-то не&nbsp;так. Не&nbsp;звоним с&nbsp;рекламой, не&nbsp;делаем рассылок и&nbsp;никому не&nbsp;передаём контакты.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary><span>Почему вход только через Яндекс&nbsp;ID или VK&nbsp;ID?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-answer">
+              <p>Так быстрее: без пароля и&nbsp;СМС, в&nbsp;пару нажатий.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary><span>Можно передать код другу?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-answer">
+              <p>Да, пока есть свободные места: в&nbsp;бете их всего 30. Или пусть оставит заявку здесь&nbsp;— пришлём код ему на&nbsp;почту.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary><span>Нужен VPN или приложение?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-answer">
+              <p>Нет. Тилво открывается в&nbsp;браузере на&nbsp;телефоне и&nbsp;компьютере, из&nbsp;любой точки России. Скачивать ничего не&nbsp;нужно.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary><span>Что будет, когда закончатся бесплатные запросы?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-answer">
+              <p>Чат предложит тариф со&nbsp;скидкой для бета-тестеров&nbsp;— или подождите: новые 20&nbsp;запросов придут через 30&nbsp;дней после первого. Остаток и&nbsp;дата всегда видны в&nbsp;чате.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary><span>Как оплатить тариф?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-answer">
+              <p>Только по&nbsp;QR-коду: отсканируйте его в&nbsp;приложении своего банка и&nbsp;подтвердите платёж. Банковской картой оплатить нельзя. Платёж разовый, на&nbsp;месяц: без автосписаний, продлить решаете сами.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary><span>Кто видит мои вопросы?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-answer">
+              <p>Ваши чаты видите только вы. Чтобы получить ответ, вопрос передаётся нейросети&nbsp;— её серверы за&nbsp;рубежом. Не&nbsp;отправляйте пароли, номера карт и&nbsp;паспортные данные.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary><span>Что-то не&nbsp;работает&nbsp;— куда писать?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-answer">
+              <p>В&nbsp;<a href="https://max.ru/" data-max-link>Max</a> по&nbsp;номеру <span class="nowrap">+7&nbsp;916&nbsp;611-30-50</span>&nbsp;— ответит человек из&nbsp;команды. Или на&nbsp;почту <a href="mailto:tilvo@yandex.ru">tilvo@yandex.ru</a>. Это бета, и&nbsp;каждое такое сообщение помогает.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Завершающий призыв -->
+    <section class="section section-band cta" aria-labelledby="cta-title">
+      <div class="container cta-inner">
+        <div>
+          <h2 id="cta-title" data-seats-cta>Осталось <span data-seats-left>12</span> <span data-seats-word>мест</span> из&nbsp;30</h2>
+          <p class="section-lead" data-seats-cta-lead>Бесплатно, без карты и&nbsp;подписки. Заявка займёт минуту.</p>
+        </div>
+        <button class="btn btn-primary" type="button" data-action="apply" data-hide-when-full>Хочу в&nbsp;бета-тест</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#top">
+          <img class="brand-mark" src="assets/logo.svg" alt="" width="24" height="24">
+          <span class="brand-word">Тилво</span>
+        </a>
+        <p class="footer-copy">© <span id="year">2026</span> Тилво</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Документы">
+        <ul>
+          <li><a href="legal/beta.html">Условия бета-теста</a></li>
+          <li><a href="legal/privacy.html">Политика конфиденциальности</a></li>
+          <li><a href="legal/consent.html">Согласие на обработку данных</a></li>
+        </ul>
+      </nav>
+
+      <p class="footer-support">Поддержка в&nbsp;<a href="https://max.ru/" data-max-link>Max</a>: <span class="nowrap">+7&nbsp;916&nbsp;611-30-50</span><br>Почта: <a href="mailto:tilvo@yandex.ru">tilvo@yandex.ru</a></p>
+    </div>
+  </footer>
+</body>
+</html>
