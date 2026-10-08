@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="only light">
+  <title>Тилво — GPT и Claude без VPN. Только для своих</title>
+  <meta name="description" content="GPT и Claude на русском — без VPN, зарубежной карты и подписки. Закрытый доступ: вход по коду приглашения.">
+  <meta property="og:title" content="Тилво — GPT и Claude без VPN. Только для своих">
+  <meta property="og:description" content="Закрытый доступ. Вход по коду приглашения.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%231F5C4D'/%3E%3Cg transform='translate(32 32) scale(0.74) translate(-32 -32)'%3E%3Cpath fill='%23F6F3EC' d='M27 7.5C43 5 58.5 16.5 59.5 32C60.4 46.5 49.5 57 34 57C17.5 57 5 47.5 4.5 33C4 19.5 13 9.7 27 7.5ZM31 36A5.5 5.5 0 0 0 31 47L48.5 47A5.5 5.5 0 0 0 48.5 36Z'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&amp;family=Literata:ital,opsz,wght@0,7..72,400..600;1,7..72,400..600&amp;display=swap&amp;subset=cyrillic" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: only light;
+      --bg: #F6F3EC;
+      --surface: #FFFFFF;
+      --surface-2: #EEE9DF;
+      --ink: #1E2320;
+      --ink-2: #2A302C;
+      --muted: #666B64;
+      --line: #DDD7CA;
+      --accent: #1F5C4D;
+      --accent-hover: #17483C;
+      --accent-ink: #FFFFFF;
+      --accent-soft: #E3EDE8;
+      --highlight: #E3B55B;
+      --danger: #A8432A;
+      --night: #1A1F1C;
+      --night-line: #343B36;
+      --night-ink: #ECE9E1;
+      --night-muted: #9AA096;
+      --shadow: rgba(30, 35, 32, 0.14);
+
+      --font-head: "Literata", Georgia, "Times New Roman", serif;
+      --font-text: "Golos Text", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      --container: 1120px;
+      --gutter: 16px;
+      --radius-lg: 22px;
+      --radius: 14px;
+      --section-space: clamp(64px, 9vw, 120px);
+    }
+    @media (min-width: 720px) { :root { --gutter: 32px; } }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: 88px; }
+    @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-text);
+      font-size: 17px;
+      line-height: 1.6;
+      overflow-wrap: break-word;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, p, ul, ol { margin: 0; }
+    ul, ol { padding: 0; list-style: none; }
+    h1, h2, h3 { font-family: var(--font-head); font-weight: 500; line-height: 1.14; letter-spacing: -0.01em; text-wrap: balance; }
+    p { text-wrap: pretty; }
+    a { color: inherit; }
+    svg { display: block; }
+    button, input { font: inherit; color: inherit; }
+    .nowrap { white-space: nowrap; }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+    .container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+    .section { padding: var(--section-space) 0; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--accent);
+    }
+    .h2 { font-size: clamp(30px, 5.2vw, 46px); margin-top: 14px; }
+    .lead { font-size: clamp(17px, 2.2vw, 19px); color: var(--muted); margin-top: 16px; max-width: 40em; }
+
+    /* ---------- Кнопки ---------- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      min-height: 54px; padding: 0 22px; border-radius: 999px; border: 0;
+      font-weight: 600; font-size: 17px; text-decoration: none; cursor: pointer;
+      transition: background-color .15s ease, transform .15s ease, box-shadow .15s ease;
+    }
+    .btn:focus-visible, .link-btn:focus-visible, input:focus-visible, summary:focus-visible, a:focus-visible {
+      outline: 3px solid var(--highlight); outline-offset: 2px;
+    }
+    .btn-primary { background: var(--accent); color: var(--accent-ink); }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-primary:active { transform: translateY(1px); }
+    .btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .link-btn { background: none; border: 0; padding: 0; cursor: pointer; color: var(--accent); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ---------- Шапка ---------- */
+    .header { position: sticky; top: 0; z-index: 10; background: rgba(246, 243, 236, 0.9); backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid transparent; transition: border-color .2s; }
+    .header.is-scrolled { border-bottom-color: var(--line); }
+    .header-row { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--font-head); font-size: 22px; font-weight: 600; }
+    .logo svg { width: 26px; height: 26px; fill: var(--ink); }
+    .header-enter {
+      display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px;
+      border: 1px solid var(--line); border-radius: 999px; background: var(--surface);
+      font-size: 15px; font-weight: 600; text-decoration: none;
+    }
+    .header-enter:hover { border-color: var(--accent); color: var(--accent); }
+    .header-enter svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ---------- Первый экран ---------- */
+    .hero { padding: 20px 0 var(--section-space); }
+    .hero-grid { display: grid; gap: 28px; align-items: center; }
+    @media (min-width: 960px) { .hero-grid { grid-template-columns: 1.1fr 0.9fr; gap: 64px; } .hero { padding-top: 64px; } }
+    .stamp {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 14px 7px 12px; border: 1.5px solid var(--accent); border-radius: 999px;
+      color: var(--accent); font-size: 14px; font-weight: 600; background: var(--accent-soft);
+    }
+    .stamp svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .hero h1 { font-size: clamp(36px, 7.4vw, 66px); margin-top: 18px; }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero-lead { font-size: clamp(17px, 2.4vw, 20px); color: var(--ink-2); margin-top: 16px; max-width: 34em; }
+    .facts { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 18px; margin-top: 16px; font-size: 15px; color: var(--muted); }
+    .facts li { display: inline-flex; align-items: center; gap: 6px; }
+    .facts svg { width: 16px; height: 16px; fill: none; stroke: var(--accent); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ---------- Пропуск (вход по коду) ---------- */
+    .pass {
+      position: relative; background: var(--surface); border-radius: var(--radius-lg);
+      box-shadow: 0 1px 0 var(--line), 0 24px 48px -24px var(--shadow), 0 0 0 1px rgba(30,35,32,.04);
+    }
+    .pass-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 22px 16px; }
+    .pass-title { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+    .pass-title svg { width: 18px; height: 18px; fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .pass-note { font-family: var(--font-head); font-style: italic; font-size: 15px; color: var(--muted); }
+    .pass-cut { position: relative; height: 0; border-top: 2px dashed var(--line); margin: 0 18px; }
+    .pass-cut::before, .pass-cut::after {
+      content: ""; position: absolute; top: -12px; width: 22px; height: 22px; border-radius: 50%; background: var(--bg);
+    }
+    .pass-cut::before { left: -30px; }
+    .pass-cut::after { right: -30px; }
+    .pass-body { padding: 22px 22px 24px; }
+    .pass-label { display: block; font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+    .pass-input {
+      width: 100%; height: 56px; padding: 0 16px; border: 1.5px solid var(--line); border-radius: var(--radius);
+      background: var(--bg); font-size: 20px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .pass-input::placeholder { color: #A29F95; font-weight: 400; letter-spacing: 0; text-transform: none; font-size: 17px; }
+    .pass-input:focus { border-color: var(--accent); background: var(--surface); outline: none; box-shadow: 0 0 0 3px var(--accent-soft); }
+    .pass-input[aria-invalid="true"] { border-color: var(--danger); }
+    .pass .btn { width: 100%; margin-top: 12px; }
+    .pass-error { margin-top: 10px; font-size: 15px; color: var(--danger); }
+    .pass-prefilled { margin-top: 8px; font-size: 14px; color: var(--accent); display: flex; gap: 6px; align-items: center; }
+    .pass-prefilled svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+    .pass-nocode { margin-top: 16px; font-size: 15px; color: var(--muted); }
+    .pass-nocode b { color: var(--ink); font-weight: 600; }
+
+    .accepted-stamp {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px; border: 2.5px solid var(--accent); border-radius: 10px;
+      color: var(--accent); font-weight: 600; font-size: 15px; letter-spacing: 0.12em; text-transform: uppercase;
+      transform: rotate(-3deg);
+    }
+    .accepted-stamp svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+    @media (prefers-reduced-motion: no-preference) {
+      .is-accepted .accepted-stamp { animation: stamp .45s cubic-bezier(.2,.9,.3,1.2) both; }
+      @keyframes stamp { from { transform: rotate(-12deg) scale(1.6); opacity: 0; } to { transform: rotate(-3deg) scale(1); opacity: 1; } }
+    }
+    .accepted-title { font-family: var(--font-head); font-size: 26px; margin-top: 16px; }
+    .accepted-text { color: var(--muted); margin-top: 4px; font-size: 16px; }
+    .providers { display: grid; gap: 10px; margin-top: 16px; }
+    .btn-provider {
+      justify-content: flex-start; width: 100%; background: var(--surface); border: 1.5px solid var(--line); color: var(--ink); padding: 0 18px;
+    }
+    .btn-provider:hover { border-color: var(--ink); }
+    .btn-provider .mark { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; color: #fff; font-weight: 700; font-size: 15px; flex: none; }
+    .btn-provider .mark-ya { background: #FC3F1D; border-radius: 50%; }
+    .btn-provider .mark-vk { background: #0077FF; font-size: 12px; }
+    .btn-provider .arrow { margin-left: auto; }
+    .pass-again { margin-top: 14px; font-size: 15px; color: var(--muted); }
+
+    /* ---------- Для всех / для своих ---------- */
+    .night { background: var(--night); color: var(--night-ink); }
+    .night .eyebrow { color: var(--highlight); }
+    .night .lead { color: var(--night-muted); }
+    .vs { margin-top: 40px; display: grid; gap: 12px; }
+    .vs-head { display: none; }
+    .vs-row { display: grid; gap: 0; border: 1px solid var(--night-line); border-radius: var(--radius); overflow: hidden; }
+    .vs-cell { padding: 14px 18px; display: flex; gap: 12px; align-items: flex-start; font-size: 16px; line-height: 1.45; }
+    .vs-cell svg { width: 18px; height: 18px; flex: none; margin-top: 2px; fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+    .vs-all { color: var(--night-muted); }
+    .vs-all svg { stroke: #8A6F66; }
+    .vs-own { background: #232A26; color: var(--night-ink); font-weight: 500; border-top: 1px solid var(--night-line); }
+    .vs-own svg { stroke: var(--highlight); }
+    .vs-tag { display: block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 2px; }
+    .vs-all .vs-tag { color: #7C827A; }
+    .vs-own .vs-tag { color: var(--highlight); }
+    @media (min-width: 760px) {
+      .vs-head { display: grid; grid-template-columns: 1fr 1fr; padding: 0 0 4px; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
+      .vs-head span:first-child { color: #7C827A; padding-left: 18px; }
+      .vs-head span:last-child { color: var(--highlight); padding-left: 18px; }
+      .vs-row { grid-template-columns: 1fr 1fr; }
+      .vs-own { border-top: 0; border-left: 1px solid var(--night-line); }
+      .vs-tag { display: none; }
+      .vs-cell { padding: 18px; font-size: 17px; }
+    }
+
+    /* ---------- Что внутри ---------- */
+    .inside-grid { display: grid; gap: 40px; align-items: center; }
+    @media (min-width: 960px) { .inside-grid { grid-template-columns: 1fr 1fr; gap: 64px; } }
+    .inside p + p { margin-top: 14px; }
+    .inside-text { font-size: clamp(17px, 2.2vw, 19px); color: var(--ink-2); margin-top: 18px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+    .chips li { padding: 8px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: 15px; font-weight: 500; }
+
+    .chat { background: var(--surface); border-radius: var(--radius-lg); box-shadow: 0 1px 0 var(--line), 0 24px 48px -28px var(--shadow); overflow: hidden; }
+    .chat-top { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-bottom: 1px solid var(--line); font-weight: 600; }
+    .chat-top svg { width: 22px; height: 22px; fill: var(--ink); }
+    .chat-top span { margin-left: auto; font-size: 13px; font-weight: 500; color: var(--accent); display: inline-flex; align-items: center; gap: 6px; }
+    .chat-top span::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #3BA272; }
+    .chat-body { padding: 18px; display: grid; gap: 12px; background: #FBFAF6; }
+    .msg { max-width: 88%; padding: 12px 15px; border-radius: 18px; font-size: 15.5px; line-height: 1.5; }
+    .msg-user { justify-self: end; background: var(--accent); color: var(--accent-ink); border-bottom-right-radius: 6px; }
+    .msg-bot { justify-self: start; background: var(--surface); border: 1px solid var(--line); border-bottom-left-radius: 6px; }
+    .msg-bot p + p { margin-top: 8px; }
+    .chat-input { display: flex; align-items: center; gap: 10px; margin: 0 14px 14px; padding: 10px 10px 10px 16px; border: 1px solid var(--line); border-radius: 999px; color: #A29F95; font-size: 15px; background: var(--surface); }
+    .chat-input span { flex: 1; }
+    .chat-input i { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--accent); }
+    .chat-input svg { width: 18px; height: 18px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ---------- Что умеет ---------- */
+    .skills { display: grid; gap: 12px; margin-top: 36px; }
+    @media (min-width: 720px) { .skills { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1040px) { .skills { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
+    .skill { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px 20px; }
+    .skill-top { display: flex; align-items: center; gap: 12px; }
+    .skill-ico { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--accent-soft); flex: none; }
+    .skill-ico svg { width: 20px; height: 20px; fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .skill h3 { font-family: var(--font-text); font-size: 18px; font-weight: 600; letter-spacing: 0; }
+    .skill-q { margin-top: 12px; font-family: var(--font-head); font-style: italic; font-size: 17px; line-height: 1.45; color: var(--ink-2); }
+    .skill-note { margin-top: 10px; font-size: 14px; color: var(--muted); }
+
+    /* ---------- Откуда Тилво ---------- */
+    .story { background: var(--surface-2); }
+    .story-grid { display: grid; gap: 32px; }
+    @media (min-width: 960px) { .story-grid { grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: start; } }
+    .story-text { margin-top: 18px; font-size: clamp(17px, 2.2vw, 19px); color: var(--ink-2); }
+    .story-text p + p { margin-top: 14px; }
+    .ask { position: relative; background: var(--surface); border-radius: var(--radius-lg); padding: 26px 24px 24px; border: 1.5px dashed #C9C1B0; }
+    .ask-title { font-family: var(--font-head); font-size: 24px; }
+    .ask p { margin-top: 10px; color: var(--ink-2); }
+    .ask-sign { margin-top: 14px; font-family: var(--font-head); font-style: italic; color: var(--muted); }
+
+    /* ---------- Вопросы ---------- */
+    .faq { margin-top: 32px; border-top: 1px solid var(--line); max-width: 820px; }
+    .faq details { border-bottom: 1px solid var(--line); }
+    .faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 0; font-weight: 600; font-size: 18px; line-height: 1.35; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary svg { width: 22px; height: 22px; flex: none; fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; transition: transform .2s ease; }
+    .faq details[open] summary svg { transform: rotate(45deg); }
+    .faq-a { padding: 0 0 22px; color: var(--ink-2); max-width: 44em; }
+    .faq-a p + p { margin-top: 10px; }
+
+    /* ---------- Финал ---------- */
+    .final { text-align: center; }
+    .final .h2 { margin-top: 0; }
+    .final p { margin: 14px auto 0; color: var(--muted); max-width: 30em; }
+    .final .btn { margin-top: 26px; }
+
+    .footer { border-top: 1px solid var(--line); padding: 28px 0 40px; font-size: 15px; color: var(--muted); }
+    .footer-row { display: flex; flex-wrap: wrap; gap: 14px 32px; align-items: center; justify-content: space-between; }
+    .footer .logo { font-size: 18px; color: var(--ink); }
+    .footer .logo svg { width: 20px; height: 20px; }
+  </style>
+</head>
+<body>
+  <!-- Иконки -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-logo" viewBox="0 0 64 64"><path d="M27 7.5C43 5 58.5 16.5 59.5 32C60.4 46.5 49.5 57 34 57C17.5 57 5 47.5 4.5 33C4 19.5 13 9.7 27 7.5ZM31 36A5.5 5.5 0 0 0 31 47L48.5 47A5.5 5.5 0 0 0 48.5 36Z"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 20 20"><path d="M4 10h11M11 5.5 15.5 10 11 14.5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3.5" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v2.5"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3.5H7a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-10z"/><path d="M14 3.5v5h5M8.5 13h7M8.5 16.5h5"/></symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5zM20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="M20.5 16l-5-5-8.5 8.5"/></symbol>
+  </svg>
+
+  <header class="header" data-header>
+    <div class="container header-row">
+      <a class="logo" href="#top" aria-label="Тилво"><svg aria-hidden="true"><use href="#i-logo"/></svg>Тилво</a>
+      <a class="header-enter" href="#door" data-focus-code><svg aria-hidden="true"><use href="#i-lock"/></svg>Вход по&nbsp;коду</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ===== Первый экран ===== -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="stamp"><svg aria-hidden="true"><use href="#i-lock"/></svg>Закрытый доступ · только для&nbsp;своих</span>
+          <h1>GPT и&nbsp;Claude без&nbsp;VPN. <br><em class="nowrap">Своим&nbsp;— бесплатно</em></h1>
+          <p class="hero-lead">Остальные ищут рабочий VPN и&nbsp;посредника, чтобы оплатить подписку из-за&nbsp;границы. Свои просто открывают Тилво и&nbsp;спрашивают&nbsp;— на&nbsp;русском, текстом или голосом.</p>
+        </div>
+
+        <div>
+        <!-- Вход по коду. Лендинг не собирает личные данные: вход и регистрация — на chat.tilvo.ru -->
+        <section class="pass" id="door" aria-labelledby="pass-title">
+          <div class="pass-head">
+            <span class="pass-title" id="pass-title"><svg aria-hidden="true"><use href="#i-lock"/></svg>Приглашение</span>
+            <span class="pass-note">только для своих</span>
+          </div>
+          <div class="pass-cut" aria-hidden="true"></div>
+
+          <div class="pass-body" data-step="code">
+            <form novalidate data-code-form>
+              <label class="pass-label" for="code">Код приглашения</label>
+              <input class="pass-input" id="code" name="code" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="32" placeholder="Введите код" aria-describedby="code-help">
+              <p class="pass-prefilled" data-prefilled hidden><svg aria-hidden="true"><use href="#i-check"/></svg>Код из&nbsp;приглашения уже подставлен</p>
+              <p class="pass-error" role="alert" data-error hidden></p>
+              <button class="btn btn-primary" type="submit">Войти по&nbsp;коду<svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+            </form>
+            <p class="pass-nocode" id="code-help"><b>Нет кода?</b> Его дают только свои&nbsp;— спросите у&nbsp;того, кто прислал вам ссылку.</p>
+          </div>
+
+          <div class="pass-body" data-step="accepted" hidden>
+            <span class="accepted-stamp"><svg aria-hidden="true"><use href="#i-check"/></svg>Код принят</span>
+            <p class="accepted-title">Теперь вы среди своих</p>
+            <p class="accepted-text">Осталось войти&nbsp;— без пароля и&nbsp;СМС, в&nbsp;пару нажатий.</p>
+            <div class="providers">
+              <a class="btn btn-provider" data-provider="yandex" href="#"><span class="mark mark-ya" aria-hidden="true">Я</span>Войти через Яндекс&nbsp;ID<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              <a class="btn btn-provider" data-provider="vk" href="#"><span class="mark mark-vk" aria-hidden="true">VK</span>Войти через VK&nbsp;ID<svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </div>
+            <p class="pass-again">Не&nbsp;тот код? <button class="link-btn" type="button" data-reset>Ввести другой</button></p>
+          </div>
+          <p class="visually-hidden" aria-live="polite" data-live></p>
+        </section>
+        <ul class="facts">
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Без VPN</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Без карты</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Ничего не&nbsp;скачивать</li>
+        </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Для всех / для своих ===== -->
+    <section class="section night" aria-labelledby="vs-title">
+      <div class="container">
+        <span class="eyebrow">Для всех и&nbsp;для своих</span>
+        <h2 class="h2" id="vs-title">Всем GPT пишет «ваш регион не&nbsp;поддерживается». У&nbsp;своих всё работает</h2>
+        <div class="vs">
+          <div class="vs-head" aria-hidden="true"><span>Как у&nbsp;всех</span><span>Как у&nbsp;своих</span></div>
+          <div class="vs-row">
+            <p class="vs-cell vs-all"><svg aria-hidden="true"><use href="#i-x"/></svg><span><span class="vs-tag">Все</span>Включают VPN и&nbsp;проверяют, подключился&nbsp;ли</span></p>
+            <p class="vs-cell vs-own"><svg aria-hidden="true"><use href="#i-check"/></svg><span><span class="vs-tag">Свои</span>Открывают Тилво в&nbsp;браузере&nbsp;— и&nbsp;сразу спрашивают</span></p>
+          </div>
+          <div class="vs-row">
+            <p class="vs-cell vs-all"><svg aria-hidden="true"><use href="#i-x"/></svg><span><span class="vs-tag">Все</span>Ищут зарубежную карту или посредника с&nbsp;комиссией</span></p>
+            <p class="vs-cell vs-own"><svg aria-hidden="true"><use href="#i-check"/></svg><span><span class="vs-tag">Свои</span>Карту не&nbsp;вводят вообще</span></p>
+          </div>
+          <div class="vs-row">
+            <p class="vs-cell vs-all"><svg aria-hidden="true"><use href="#i-x"/></svg><span><span class="vs-tag">Все</span>Платят за&nbsp;подписку $20 в&nbsp;месяц плюс комиссию</span></p>
+            <p class="vs-cell vs-own"><svg aria-hidden="true"><use href="#i-check"/></svg><span><span class="vs-tag">Свои</span>Пользуются бесплатно</span></p>
+          </div>
+          <div class="vs-row">
+            <p class="vs-cell vs-all"><svg aria-hidden="true"><use href="#i-x"/></svg><span><span class="vs-tag">Все</span>Забыли выключить VPN&nbsp;— и&nbsp;не&nbsp;открываются российские сайты</span></p>
+            <p class="vs-cell vs-own"><svg aria-hidden="true"><use href="#i-check"/></svg><span><span class="vs-tag">Свои</span>Про VPN не&nbsp;думают&nbsp;— он не&nbsp;нужен</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Что внутри ===== -->
+    <section class="section" aria-labelledby="inside-title">
+      <div class="container inside-grid">
+        <div class="inside">
+          <span class="eyebrow">Что внутри</span>
+          <h2 class="h2" id="inside-title">Тот самый GPT. И&nbsp;Claude в&nbsp;придачу</h2>
+          <div class="inside-text">
+            <p>Тилво&nbsp;— это GPT от&nbsp;OpenAI, на&nbsp;котором работает ChatGPT, и&nbsp;Claude от&nbsp;Anthropic в&nbsp;одном окне. Не&nbsp;копия и&nbsp;не&nbsp;аналог&nbsp;— те&nbsp;же нейросети, только с&nbsp;простым входом из&nbsp;России.</p>
+            <p>Какую из&nbsp;них позвать, Тилво решает сам&nbsp;— по&nbsp;сложности вопроса. Вы&nbsp;просто пишете или говорите, как в&nbsp;мессенджере.</p>
+          </div>
+          <ul class="chips">
+            <li>Телефон и&nbsp;компьютер</li>
+            <li>Текст и&nbsp;голос</li>
+            <li>Фото и&nbsp;документы</li>
+            <li>Всё на&nbsp;русском</li>
+          </ul>
+        </div>
+
+        <div class="chat" role="img" aria-label="Пример диалога в Тилво: вопрос про анализ крови и ответ простыми словами">
+          <div class="chat-top"><svg aria-hidden="true"><use href="#i-logo"/></svg>Тилво<span>для своих</span></div>
+          <div class="chat-body">
+            <div class="msg msg-user">Что значит повышенная СОЭ в&nbsp;анализе крови мамы? Объясни простыми словами.</div>
+            <div class="msg msg-bot">
+              <p>СОЭ&nbsp;— скорость, с&nbsp;которой оседают клетки крови. Если она выше нормы, чаще всего в&nbsp;организме идёт воспаление: например, после простуды. С&nbsp;возрастом СОЭ тоже немного растёт.</p>
+              <p>По&nbsp;одной цифре диагноз не&nbsp;ставят. Покажите анализ терапевту&nbsp;— он сравнит его с&nbsp;другими показателями и&nbsp;самочувствием мамы.</p>
+            </div>
+          </div>
+          <div class="chat-input"><span>Спросите текстом или голосом…</span><i><svg aria-hidden="true"><use href="#i-mic"/></svg></i></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Что умеет ===== -->
+    <section class="section" style="padding-top:0" aria-labelledby="skills-title">
+      <div class="container">
+        <span class="eyebrow">Что умеет</span>
+        <h2 class="h2" id="skills-title">Спрашивайте о&nbsp;том, что нужно вам</h2>
+        <p class="lead">Своими словами&nbsp;— как пишете знакомым. Не&nbsp;хочется печатать&nbsp;— нажмите микрофон и&nbsp;скажите.</p>
+        <ul class="skills">
+          <li class="skill">
+            <div class="skill-top"><span class="skill-ico"><svg aria-hidden="true"><use href="#i-bulb"/></svg></span><h3>Объясняет простыми словами</h3></div>
+            <p class="skill-q">«Что значат эти показатели в&nbsp;анализе крови мамы?»</p>
+            <p class="skill-note">Объясняет, но&nbsp;не&nbsp;ставит диагноз: решения о&nbsp;лечении&nbsp;— с&nbsp;врачом.</p>
+          </li>
+          <li class="skill">
+            <div class="skill-top"><span class="skill-ico"><svg aria-hidden="true"><use href="#i-doc"/></svg></span><h3>Читает фото и&nbsp;документы</h3></div>
+            <p class="skill-q">«Вот фото квитанции за&nbsp;ЖКХ&nbsp;— почему сумма выросла?»</p>
+          </li>
+          <li class="skill">
+            <div class="skill-top"><span class="skill-ico"><svg aria-hidden="true"><use href="#i-pen"/></svg></span><h3>Пишет за&nbsp;вас</h3></div>
+            <p class="skill-q">«Составь претензию в&nbsp;магазин: чайник сломался через неделю, хочу вернуть деньги»</p>
+          </li>
+          <li class="skill">
+            <div class="skill-top"><span class="skill-ico"><svg aria-hidden="true"><use href="#i-book"/></svg></span><h3>Помогает с&nbsp;уроками</h3></div>
+            <p class="skill-q">«Объясни пятикласснику дроби&nbsp;— но&nbsp;не&nbsp;решай задачу за&nbsp;него»</p>
+          </li>
+          <li class="skill">
+            <div class="skill-top"><span class="skill-ico"><svg aria-hidden="true"><use href="#i-search"/></svg></span><h3>Ищет свежее в&nbsp;интернете</h3></div>
+            <p class="skill-q">«Какие документы нужны для налогового вычета за&nbsp;лечение в&nbsp;этом году?»</p>
+          </li>
+          <li class="skill">
+            <div class="skill-top"><span class="skill-ico"><svg aria-hidden="true"><use href="#i-image"/></svg></span><h3>Создаёт изображения</h3></div>
+            <p class="skill-q">«Сделай открытку сестре к&nbsp;юбилею&nbsp;— с&nbsp;цветами и&nbsp;тёплой подписью»</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== Откуда Тилво ===== -->
+    <section class="section story" aria-labelledby="story-title">
+      <div class="container story-grid">
+        <div>
+          <span class="eyebrow">Откуда Тилво</span>
+          <h2 class="h2" id="story-title">Сделали для себя. Теперь пускаем своих</h2>
+          <div class="story-text">
+            <p>Нам надоело воевать с&nbsp;VPN и&nbsp;искать, чем оплатить подписку из-за&nbsp;границы. Поэтому сначала мы сделали Тилво для себя.</p>
+            <p>Несколько месяцев пользуемся им сами&nbsp;— с&nbsp;телефона и&nbsp;компьютера, без сбоев. В&nbsp;открытую Тилво не&nbsp;продаётся: вход только по&nbsp;приглашению&nbsp;— для своих и&nbsp;для тех, кого позвали свои.</p>
+          </div>
+        </div>
+        <aside class="ask" aria-labelledby="ask-title">
+          <p class="ask-title" id="ask-title">Одна просьба</p>
+          <p>Код можно дать близким&nbsp;— маме, другу, коллеге. Только не&nbsp;выкладывайте его в&nbsp;открытый доступ: Тилво&nbsp;— для своих.</p>
+          <p class="ask-sign">— команда Тилво</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===== Коротко ===== -->
+    <section class="section" aria-labelledby="faq-title">
+      <div class="container">
+        <span class="eyebrow">Коротко</span>
+        <h2 class="h2" id="faq-title">Что обычно спрашивают свои</h2>
+        <div class="faq">
+          <details>
+            <summary>Это правда GPT, как в&nbsp;ChatGPT?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="faq-a"><p>Да. GPT от&nbsp;OpenAI&nbsp;— та&nbsp;же нейросеть, на&nbsp;которой работает ChatGPT. А&nbsp;ещё Claude от&nbsp;Anthropic. Не&nbsp;аналог и&nbsp;не&nbsp;копия: мы сделали к&nbsp;ним простой вход из&nbsp;России.</p></div>
+          </details>
+          <details>
+            <summary>Бесплатно? Где подвох?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="faq-a"><p>Подвоха нет. Своим Тилво бесплатен: карту не&nbsp;просим, ничего не&nbsp;спишется.</p><p>В&nbsp;месяц&nbsp;— 20&nbsp;запросов: на&nbsp;обычные вопросы этого хватает с&nbsp;запасом. Сколько осталось, всегда видно в&nbsp;чате.</p></div>
+          </details>
+          <details>
+            <summary>Нужен VPN или приложение?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="faq-a"><p>Нет. Тилво открывается в&nbsp;браузере на&nbsp;телефоне и&nbsp;компьютере, из&nbsp;любой точки России. Скачивать ничего не&nbsp;нужно.</p></div>
+          </details>
+          <details>
+            <summary>Где взять код?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="faq-a"><p>Только у&nbsp;своих&nbsp;— у&nbsp;того, кто прислал вам ссылку. Купить код или получить его на&nbsp;сайте нельзя.</p></div>
+          </details>
+          <details>
+            <summary>Как войти?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="faq-a"><p>Введите код и&nbsp;войдите через Яндекс&nbsp;ID или VK&nbsp;ID&nbsp;— без пароля и&nbsp;СМС. Это минута.</p></div>
+          </details>
+          <details>
+            <summary>Кто видит мои вопросы?<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="faq-a"><p>Ваши чаты видите только вы. Чтобы получить ответ, вопрос уходит нейросети&nbsp;— её серверы за&nbsp;рубежом. Не&nbsp;отправляйте пароли, номера карт и&nbsp;паспортные данные.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Финал ===== -->
+    <section class="section final" style="padding-top:0" aria-labelledby="final-title">
+      <div class="container">
+        <h2 class="h2" id="final-title">Вас позвали&nbsp;— заходите</h2>
+        <p>Код&nbsp;— у&nbsp;того, кто прислал вам ссылку.</p>
+        <a class="btn btn-primary" href="#door" data-focus-code>Ввести код приглашения<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-row">
+      <a class="logo" href="#top"><svg aria-hidden="true"><use href="#i-logo"/></svg>Тилво</a>
+      <p>Вопрос? Свои пишут нам в&nbsp;<a href="https://max.ru/">Max</a>: <span class="nowrap">+7&nbsp;916&nbsp;611-30-50</span></p>
+      <p>© 2026 Тилво</p>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    var CHAT_URL = 'https://chat.tilvo.ru';
+
+    // TODO: настоящую проверку кода делает сервер (chat.tilvo.ru). Здесь — только проверка формата.
+    function looksLikeCode(code) { return /^[A-ZА-ЯЁ0-9-]{4,32}$/.test(code); }
+
+    // TODO: форма входа на chat.tilvo.ru должна принять код из ссылки
+    function loginHref(code, provider) {
+      return CHAT_URL + '/?invite=' + encodeURIComponent(code) + '&provider=' + provider;
+    }
+
+    var header = document.querySelector('[data-header]');
+    function onScroll() { header.classList.toggle('is-scrolled', window.scrollY > 8); }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    var door = document.getElementById('door');
+    var form = door.querySelector('[data-code-form]');
+    var input = document.getElementById('code');
+    var error = door.querySelector('[data-error]');
+    var prefilled = door.querySelector('[data-prefilled]');
+    var stepCode = door.querySelector('[data-step="code"]');
+    var stepOk = door.querySelector('[data-step="accepted"]');
+    var live = door.querySelector('[data-live]');
+
+    function normalize(v) { return v.trim().toUpperCase().replace(/\s+/g, ''); }
+
+    function showError(text) {
+      error.textContent = text;
+      error.hidden = false;
+      input.setAttribute('aria-invalid', 'true');
+    }
+    function clearError() {
+      error.hidden = true;
+      input.removeAttribute('aria-invalid');
+    }
+
+    function accept(code) {
+      door.querySelectorAll('[data-provider]').forEach(function (a) {
+        a.href = loginHref(code, a.getAttribute('data-provider'));
+      });
+      stepCode.hidden = true;
+      stepOk.hidden = false;
+      door.classList.add('is-accepted');
+      live.textContent = 'Код принят. Войдите через Яндекс ID или VK ID.';
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var code = normalize(input.value);
+      if (!code) { showError('Введите код из приглашения.'); input.focus(); return; }
+      if (!looksLikeCode(code)) { showError('Такого кода нет. Проверьте, всё ли скопировали.'); input.focus(); return; }
+      clearError();
+      accept(code);
+    });
+    input.addEventListener('input', function () { clearError(); prefilled.hidden = true; });
+
+    door.querySelector('[data-reset]').addEventListener('click', function () {
+      stepOk.hidden = true;
+      stepCode.hidden = false;
+      door.classList.remove('is-accepted');
+      input.value = '';
+      input.focus();
+    });
+
+    // Код из ссылки приглашения: ?code=… или ?invite=…
+    var params = new URLSearchParams(window.location.search);
+    var fromLink = normalize(params.get('code') || params.get('invite') || '');
+    if (fromLink) {
+      input.value = fromLink;
+      prefilled.hidden = false;
+    }
+
+    document.querySelectorAll('[data-focus-code]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        if (!stepCode.hidden) setTimeout(function () { input.focus({ preventScroll: true }); }, 350);
+      });
+    });
+  })();
+  </script>
+</body>
+</html>
