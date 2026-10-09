@@ -464,10 +464,12 @@
             </ul>
           </li>
           <li class="pain">
-            <div class="pain-head"><span class="pain-ico"><svg class="ico" aria-hidden="true"><use href="#i-ruble"/></svg></span><h3>Приложения «ChatGPT на&nbsp;русском»</h3></div>
+            <div class="pain-head"><span class="pain-ico"><svg class="ico" aria-hidden="true"><use href="#i-tune"/></svg></span><h3>Агрегаторы нейросетей</h3></div>
             <ul>
               <li>«Проба за&nbsp;1&nbsp;₽»&nbsp;— а&nbsp;потом с&nbsp;карты ушло 1&nbsp;990&nbsp;₽.</li>
-              <li>И&nbsp;где отписаться&nbsp;— не&nbsp;найти.</li>
+              <li>Где отписаться&nbsp;— не&nbsp;найти.</li>
+              <li>Сложный интерфейс: десятки моделей, настроек и&nbsp;параметров&nbsp;— легко запутаться.</li>
+              <li>Токены вместо вопросов: не&nbsp;посчитать, сколько стоит ответ и&nbsp;что входит в&nbsp;лимит.</li>
             </ul>
           </li>
         </ul>
@@ -486,9 +488,9 @@
           <ul class="answers">
             <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span><b>Разбирается, а&nbsp;не&nbsp;отсылает к&nbsp;сайтам.</b> Учтёт ваши цифры и&nbsp;обстоятельства, объяснит по&nbsp;шагам и&nbsp;скажет, что делать дальше.</span></li>
             <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span><b>Отвечает на&nbsp;важное.</b> Анализы, деньги, документы, претензии&nbsp;— простыми словами, без «лучше промолчу».</span></li>
-            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span><b>Помнит разговор.</b> Уточняйте&nbsp;— объяснять заново не&nbsp;придётся.</span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span><b>Помнит вас.</b> Даже в&nbsp;новом чате знает, о&nbsp;чём вы говорили раньше,&nbsp;— объяснять заново не&nbsp;придётся.</span></li>
             <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span><b>Открывается сразу.</b> Без VPN, зарубежного номера и&nbsp;карты.</span></li>
-            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span><b>Без «пробы за&nbsp;1&nbsp;₽».</b> Ничего не&nbsp;спишется само: платите, только когда решите сами.</span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span><b>Без настроек, токенов и&nbsp;«пробы за&nbsp;1&nbsp;₽».</b> Просто спросите&nbsp;— ничего не&nbsp;спишется само.</span></li>
           </ul>
           <ul class="facts">
             <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Телефон и&nbsp;компьютер</li>
@@ -589,6 +591,7 @@
                 <li>Яндекс&nbsp;ID</li>
                 <li>VK&nbsp;ID</li>
               </ul>
+              <p class="ladder-after" data-link-code hidden><svg class="ico" aria-hidden="true"><use href="#i-key"/></svg>Код приглашения уже вставлен</p>
               <p class="ladder-sub">Без пароля и&nbsp;СМС</p>
             </div>
           </li>
@@ -705,7 +708,7 @@
       <p class="sheet-title" id="sheet-title" data-sheet-title>Войдите и&nbsp;спрашивайте</p>
       <p class="sheet-q" data-sheet-q hidden></p>
       <p class="sheet-text">20&nbsp;вопросов в&nbsp;месяц&nbsp;— бесплатно. Без карты, пароля и&nbsp;СМС.</p>
-      <p class="sheet-code-ok" data-code-ok hidden><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Код приглашения применён</p>
+      <p class="sheet-code-ok" data-link-code hidden><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Код приглашения применён</p>
 
       <div class="sheet-code" data-invite-only>
         <label for="code">Код приглашения</label>
@@ -753,7 +756,7 @@
       });
       document.querySelectorAll('[data-step-num]').forEach(function (el) { el.textContent = '1'; });
     }
-    if (codeFromLink) document.querySelector('[data-code-ok]').hidden = false;
+    if (codeFromLink) document.querySelectorAll('[data-link-code]').forEach(function (el) { el.hidden = false; });
     if (INVITE_ONLY && !codeFromLink) {
       document.querySelectorAll('[data-no-code-text]').forEach(function (el) { el.innerHTML = el.getAttribute('data-no-code-text'); });
     }
