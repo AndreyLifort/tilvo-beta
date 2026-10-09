@@ -31,6 +31,7 @@
       --highlight: #E3B55B;
       --highlight-soft: #F6EBD3;
       --danger: #A8432A;
+      --danger-soft: #F5E4DE;
       --shadow: rgba(30, 35, 32, 0.14);
 
       --font-head: "Literata", Georgia, "Times New Roman", serif;
@@ -163,7 +164,18 @@
     .get h3 { font-family: var(--font-text); font-size: 17px; font-weight: 600; letter-spacing: 0; line-height: 1.35; }
     .get p { font-size: 15.5px; color: var(--muted); margin-top: 2px; line-height: 1.5; }
 
-    /* ---------- Тот самый GPT ---------- */
+    /* ---------- Знакомо? ---------- */
+    .pains { display: grid; gap: 12px; margin-top: 32px; }
+    @media (min-width: 900px) { .pains { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
+    .pain { padding: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+    .pain-head { display: flex; align-items: center; gap: 12px; }
+    .pain-ico { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--danger-soft); color: var(--danger); flex: none; }
+    .pain h3 { font-family: var(--font-text); font-size: 17px; font-weight: 600; letter-spacing: 0; line-height: 1.35; }
+    .pain ul { display: grid; gap: 8px; margin-top: 14px; }
+    .pain li { position: relative; padding-left: 18px; font-size: 15.5px; line-height: 1.5; color: var(--ink-2); }
+    .pain li::before { content: "—"; position: absolute; left: 0; color: var(--faint); }
+
+    /* ---------- Та самая нейросеть ---------- */
     .real { background: var(--surface-2); }
     .real-grid { display: grid; gap: 36px; align-items: center; }
     @media (min-width: 960px) { .real-grid { grid-template-columns: 1fr 1fr; gap: 64px; } }
@@ -172,6 +184,13 @@
     .facts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
     .facts li { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: 15px; font-weight: 500; }
     .facts .ico { width: 16px; height: 16px; color: var(--accent); stroke-width: 2.4; }
+    .answers { display: grid; gap: 14px; margin-top: 22px; }
+    .answers li { display: flex; gap: 12px; align-items: flex-start; font-size: 16px; line-height: 1.5; color: var(--ink-2); }
+    .answers .ico { width: 20px; height: 20px; color: var(--accent); stroke-width: 2.4; margin-top: 2px; }
+    .answers b { color: var(--ink); font-weight: 600; }
+    .real-cta { grid-column: 1 / -1; }
+    .real-cta .btn { width: 100%; }
+    @media (min-width: 720px) { .real-cta .btn { width: auto; } }
 
     .chat { background: var(--surface); border-radius: var(--radius-lg); box-shadow: 0 1px 0 var(--line), 0 24px 48px -28px var(--shadow); overflow: hidden; }
     .chat-top { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-bottom: 1px solid var(--line); font-weight: 600; }
@@ -181,6 +200,7 @@
     .msg-user { justify-self: end; background: var(--accent); color: var(--accent-ink); border-bottom-right-radius: 6px; }
     .msg-bot { justify-self: start; background: var(--surface); border: 1px solid var(--line); border-bottom-left-radius: 6px; }
     .msg-bot p + p { margin-top: 8px; }
+    .msg-bot ol { display: grid; gap: 4px; margin-top: 6px; padding-left: 20px; list-style: decimal; }
     .chat-input { display: flex; align-items: center; gap: 10px; margin: 0 14px 14px; padding: 8px 8px 8px 16px; border: 1px solid var(--line); border-radius: 999px; color: var(--faint); font-size: 15px; background: var(--surface); }
     .chat-input span { flex: 1; }
     .chat-input i { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; }
@@ -242,6 +262,12 @@
       .ladder-text { padding-top: 0; }
     }
 
+    /* ---------- Без приложения ---------- */
+    .app-note { display: flex; gap: 14px; align-items: flex-start; max-width: 640px; margin-bottom: clamp(48px, 7vw, 72px); padding: 18px 20px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+    .app-note h3 { font-family: var(--font-text); font-size: 17px; font-weight: 600; letter-spacing: 0; line-height: 1.35; }
+    .app-note p { margin-top: 4px; font-size: 15.5px; color: var(--muted); line-height: 1.5; }
+    .app-note a { color: var(--accent); font-weight: 600; }
+
     /* ---------- Вопросы ---------- */
     .faq { margin-top: 28px; border-top: 1px solid var(--line); max-width: 820px; }
     .faq details { border-bottom: 1px solid var(--line); }
@@ -292,6 +318,8 @@
     .sheet-code input::placeholder { color: var(--faint); font-weight: 400; letter-spacing: 0; text-transform: none; font-size: 16px; }
     .sheet-code input:focus { border-color: var(--accent); background: var(--surface); outline: none; box-shadow: 0 0 0 3px var(--accent-soft); }
     .sheet-code-note { margin-top: 6px; font-size: 14px; color: var(--muted); line-height: 1.45; }
+    .sheet-code-ok { display: flex; align-items: center; gap: 8px; margin-top: 14px; font-size: 15px; font-weight: 600; color: var(--accent); }
+    .sheet-code-ok .ico { width: 18px; height: 18px; stroke-width: 2.4; }
     .providers { display: grid; gap: 10px; margin-top: 16px; }
     .btn-provider { justify-content: flex-start; width: 100%; background: var(--surface); border: 1.5px solid var(--line); color: var(--ink); padding: 0 18px; }
     .btn-provider:hover { border-color: var(--ink); }
@@ -356,7 +384,7 @@
             <button class="chip" type="button" data-fill="Помоги сыну разобраться с дробями, но не решай за него">Помоги с уроками</button>
           </div>
           <button class="btn btn-primary" type="submit">Задать вопрос бесплатно<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></button>
-          <p class="ask-note"><b>20&nbsp;вопросов в&nbsp;месяц бесплатно.</b> Без карты и&nbsp;СМС&nbsp;— вход через Яндекс&nbsp;ID или VK&nbsp;ID.</p>
+          <p class="ask-note" data-no-code-text="<b>20&nbsp;вопросов в&nbsp;месяц бесплатно.</b> Вход по&nbsp;коду из&nbsp;поста&nbsp;— через Яндекс&nbsp;ID или VK&nbsp;ID, без карты и&nbsp;СМС."><b>20&nbsp;вопросов в&nbsp;месяц бесплатно.</b> Без карты и&nbsp;СМС&nbsp;— вход через Яндекс&nbsp;ID или VK&nbsp;ID.</p>
         </form>
       </div>
     </section>
@@ -411,16 +439,57 @@
       </div>
     </section>
 
-    <!-- ===== 3. Тот самый GPT ===== -->
+    <!-- ===== 2б. Знакомо? ===== -->
+    <section class="section" style="padding-top:0" aria-labelledby="pains-title">
+      <div class="container">
+        <p class="eyebrow">Знакомо?</p>
+        <h2 class="h2" id="pains-title">Простой вопрос есть где задать. А&nbsp;важный&nbsp;— негде</h2>
+
+        <ul class="pains">
+          <li class="pain">
+            <div class="pain-head"><span class="pain-ico"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg></span><h3>Бесплатная нейросеть в&nbsp;телефоне</h3></div>
+            <ul>
+              <li>Погоду, рецепт, перевод слова&nbsp;— подскажет.</li>
+              <li>Спросите о&nbsp;важном&nbsp;— получите общие слова и&nbsp;ссылки: разбирайтесь сами.</li>
+              <li>Про здоровье может ответить: «Лучше промолчу».</li>
+              <li>Уточняете&nbsp;— а&nbsp;она уже забыла, о&nbsp;чём разговор.</li>
+            </ul>
+          </li>
+          <li class="pain">
+            <div class="pain-head"><span class="pain-ico"><svg class="ico" aria-hidden="true"><use href="#i-globe"/></svg></span><h3>ChatGPT</h3></div>
+            <ul>
+              <li>Им пользуются все вокруг, о&nbsp;нём постоянно говорят.</li>
+              <li>А&nbsp;у&nbsp;вас он не&nbsp;открывается: нужен VPN.</li>
+              <li>Для регистрации и&nbsp;оплаты&nbsp;— зарубежный номер и&nbsp;карта.</li>
+            </ul>
+          </li>
+          <li class="pain">
+            <div class="pain-head"><span class="pain-ico"><svg class="ico" aria-hidden="true"><use href="#i-ruble"/></svg></span><h3>Приложения «ChatGPT на&nbsp;русском»</h3></div>
+            <ul>
+              <li>«Проба за&nbsp;1&nbsp;₽»&nbsp;— а&nbsp;потом с&nbsp;карты ушло 1&nbsp;990&nbsp;₽.</li>
+              <li>И&nbsp;где отписаться&nbsp;— не&nbsp;найти.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== 3. Та самая нейросеть ===== -->
     <section class="section real" aria-labelledby="real-title">
       <div class="container real-grid">
         <div>
           <p class="eyebrow">Это настоящий GPT</p>
-          <h2 class="h2" id="real-title">Тот самый GPT. И&nbsp;Claude в&nbsp;придачу</h2>
+          <h2 class="h2" id="real-title">Та самая нейросеть, которой уже пользуются все</h2>
           <div class="real-text">
-            <p>Тилво&nbsp;— это GPT от&nbsp;OpenAI, на&nbsp;котором работает ChatGPT, и&nbsp;Claude от&nbsp;Anthropic. Не&nbsp;копия и&nbsp;не&nbsp;аналог&nbsp;— те&nbsp;же нейросети, с&nbsp;простым входом из&nbsp;России. Выбирать ничего не&nbsp;нужно: просто спросите.</p>
-            <p>Сначала мы сделали Тилво для себя. Несколько месяцев пользуемся им самиНесколько месяцев пользуемся им каждый день&nbsp;— с&nbsp;телефонаnbsp;— с&nbsp;телефона и&nbsp;компьютера, без сбоев.</p>
+            <p>Тилво&nbsp;— это GPT от&nbsp;OpenAI, на&nbsp;котором работает ChatGPT, и&nbsp;Claude от&nbsp;Anthropic. Не&nbsp;копия и&nbsp;не&nbsp;аналог&nbsp;— те&nbsp;же нейросети, с&nbsp;простым входом из&nbsp;России.</p>
           </div>
+          <ul class="answers">
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span><b>Разбирается, а&nbsp;не&nbsp;отсылает к&nbsp;сайтам.</b> Учтёт ваши цифры и&nbsp;обстоятельства, объяснит по&nbsp;шагам и&nbsp;скажет, что делать дальше.</span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span><b>Отвечает на&nbsp;важное.</b> Анализы, деньги, документы, претензии&nbsp;— простыми словами, без «лучше промолчу».</span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span><b>Помнит разговор.</b> Уточняйте&nbsp;— объяснять заново не&nbsp;придётся.</span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span><b>Открывается сразу.</b> Без VPN, зарубежного номера и&nbsp;карты.</span></li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span><b>Без «пробы за&nbsp;1&nbsp;₽».</b> Ничего не&nbsp;спишется само: платите, только когда решите сами.</span></li>
+          </ul>
           <ul class="facts">
             <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Телефон и&nbsp;компьютер</li>
             <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Текст и&nbsp;голос</li>
@@ -429,16 +498,29 @@
           </ul>
         </div>
 
-        <div class="chat" role="img" aria-label="Пример ответа в Тилво: вопрос про анализ крови и объяснение простыми словами">
+        <div class="chat" role="img" aria-label="Пример разговора в Тилво: вопрос про СОЭ в анализе мамы, разбор с учётом возраста и вопросы для терапевта">
           <div class="chat-top"><svg aria-hidden="true"><use href="#i-logo"/></svg>Тилво</div>
           <div class="chat-body">
-            <div class="msg msg-user">Что значит повышенная СОЭ в&nbsp;анализе крови мамы? Объясни простыми словами.</div>
+            <div class="msg msg-user">СОЭ 28, а&nbsp;в&nbsp;бланке норма до&nbsp;20. Маме 64&nbsp;года. Это опасно?</div>
             <div class="msg msg-bot">
-              <p>СОЭ&nbsp;— скорость, с&nbsp;которой оседают клетки крови. Если она выше нормы, чаще всего в&nbsp;организме идёт воспаление: например, после простуды. С&nbsp;возрастом СОЭ тоже немного растёт.</p>
-              <p>По&nbsp;одной цифре диагноз не&nbsp;ставят. Покажите анализ терапевту&nbsp;— он сравнит его с&nbsp;другими показателями и&nbsp;самочувствием мамы.</p>
+              <p>Не&nbsp;обязательно. В&nbsp;бланке часто стоит норма для молодых, а&nbsp;с&nbsp;возрастом СОЭ растёт. Для женщины 64&nbsp;лет верхняя граница&nbsp;— около 37&nbsp;мм/ч (считают так: возраст +&nbsp;10, делённое на&nbsp;2). 28 в&nbsp;неё укладывается.</p>
+              <p>Посмотрите в&nbsp;этом&nbsp;же анализе лейкоциты и&nbsp;СРБ: если они в&nbsp;норме, воспаления, скорее всего, нет.</p>
+            </div>
+            <div class="msg msg-user">Что тогда спросить у&nbsp;терапевта?</div>
+            <div class="msg msg-bot">
+              <p>Три вопроса:</p>
+              <ol>
+                <li>Пересдать&nbsp;ли СОЭ и&nbsp;СРБ через 2–3&nbsp;недели?</li>
+                <li>Может&nbsp;ли это быть после недавней простуды или больного зуба?</li>
+                <li>Какие ещё анализы стоит сдавать маме в&nbsp;её возрасте?</li>
+              </ol>
             </div>
           </div>
           <div class="chat-input"><span>Спросите текстом или голосом…</span><i><svg class="ico" aria-hidden="true"><use href="#i-mic"/></svg></i></div>
+        </div>
+
+        <div class="real-cta">
+          <button class="btn btn-primary" type="button" data-login>Задать вопрос бесплатно<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></button>
         </div>
       </div>
     </section>
@@ -468,16 +550,16 @@
             <p class="plan-price"><strong>199&nbsp;₽</strong><span>в&nbsp;месяц</span><s>249&nbsp;₽</s></p>
             <p class="plan-sale">−20% первым пользователям&nbsp;— навсегда</p>
             <ul>
-              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Спрашивайте сколько хотите&nbsp;— 100&nbsp;вопросов в&nbsp;месяц</li>
-              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>История чатов: к&nbsp;ответу можно вернуться</li>
-              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Всё, что в&nbsp;бесплатном: голос, фото, открытки</li>
+              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Вопросов хватит на&nbsp;каждый день</li>
+              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Помнит разговор и&nbsp;хранит историю чатов: к&nbsp;любому ответу можно вернуться</li>
+              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Голос, фото, документы и&nbsp;файлы</li>
             </ul>
-            <button class="btn btn-primary" type="button" data-login>Попробовать бесплатно</button>
+            <button class="btn btn-primary" type="button" data-login>Начать бесплатно</button>
           </article>
         </div>
 
         <ul class="trust">
-          <li><svg class="ico" aria-hidden="true"><use href="#i-counter"/></svg>Считаем вопросы, а&nbsp;не&nbsp;токены: остаток всегда на&nbsp;экране</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-counter"/></svg>Без токенов и&nbsp;доплат: цена всегда одна</li>
           <li><svg class="ico" aria-hidden="true"><use href="#i-hand"/></svg>Без автосписаний: продлеваете сами, когда нужно</li>
           <li><svg class="ico" aria-hidden="true"><use href="#i-ruble"/></svg>Оплата в&nbsp;рублях, без зарубежной карты</li>
           <li><svg class="ico" aria-hidden="true"><use href="#i-globe"/></svg>Работает в&nbsp;России без VPN</li>
@@ -541,6 +623,14 @@
     <!-- ===== 6. Частые вопросы ===== -->
     <section class="section" aria-labelledby="faq-title">
       <div class="container">
+        <div class="app-note">
+          <span class="get-ico"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg></span>
+          <div>
+            <h3>Как приложение&nbsp;— только без установки</h3>
+            <p>Сохраните Тилво на&nbsp;экран телефона&nbsp;— появится значок, как у&nbsp;приложения. Без магазина приложений и&nbsp;обновлений. <a href="#faq-home" data-open-faq>Как это сделать&nbsp;— в&nbsp;вопросах ниже</a></p>
+          </div>
+        </div>
+
         <p class="eyebrow">Вопросы</p>
         <h2 class="h2" id="faq-title">Частые вопросы</h2>
         <div class="faq">
@@ -556,6 +646,10 @@
             <summary>Нужен VPN или приложение?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
             <div class="faq-a"><p>Нет. Тилво открывается в&nbsp;браузере на&nbsp;телефоне и&nbsp;компьютере, из&nbsp;любой точки России. Ничего устанавливать не&nbsp;нужно.</p></div>
           </details>
+          <details id="faq-home">
+            <summary>Как сохранить Тилво на&nbsp;экран телефона?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="faq-a"><p>Войдите в&nbsp;Тилво с&nbsp;телефона, затем:</p><p><b>iPhone</b> (Safari): «Поделиться» → «На&nbsp;экран „Домой“».</p><p><b>Android</b> (Chrome): ⋮ → «Добавить на&nbsp;главный экран».</p><p>Появится значок Тилво&nbsp;— открывайте одним нажатием.</p></div>
+          </details>
           <details>
             <summary>Можно спросить голосом?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
             <div class="faq-a"><p>Да. Нажмите микрофон и&nbsp;говорите&nbsp;— Тилво распознает речь и&nbsp;ответит текстом. Удобно, когда некогда печатать.</p></div>
@@ -565,12 +659,16 @@
             <div class="faq-a"><p>Сейчас вход&nbsp;— по&nbsp;коду приглашения. Он есть в&nbsp;посте или сообщении, где вы узнали о&nbsp;Тилво. Код можно передать близким.</p></div>
           </details>
           <details>
+            <summary>Что считается одним вопросом?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+            <div class="faq-a"><p>Одно ваше сообщение и&nbsp;ответ на&nbsp;него. Уточнили&nbsp;— это ещё один вопрос. Ответ не&nbsp;оборвётся на&nbsp;середине.</p></div>
+          </details>
+          <details>
             <summary>Что будет, когда закончатся вопросы?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-            <div class="faq-a"><p>Новые 20&nbsp;вопросов придут через 30&nbsp;дней после первого&nbsp;— дата видна в&nbsp;чате. Или возьмите «Лёгкий»: 100&nbsp;вопросов в&nbsp;месяц, остаток всегда на&nbsp;экране. Доплат за&nbsp;токены нет.</p></div>
+            <div class="faq-a"><p>Новые 20&nbsp;вопросов придут через 30&nbsp;дней после первого&nbsp;— дата видна в&nbsp;чате. Или подключите «Лёгкий»: вопросов хватит на&nbsp;каждый день. Доплат за&nbsp;токены нет.</p></div>
           </details>
           <details>
             <summary>Как оплатить «Лёгкий»?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-            <div class="faq-a"><p>В&nbsp;рублях, прямо в&nbsp;чате. Зарубежная карта и&nbsp;посредники не&nbsp;нужны. Платёж на&nbsp;месяц, без автосписаний: продлить решаете сами.</p></div>
+            <div class="faq-a"><p>По&nbsp;СБП: в&nbsp;чате появится QR-код&nbsp;— отсканируйте его в&nbsp;приложении своего банка. Зарубежная карта не&nbsp;нужна.</p><p>Платёж разовый, на&nbsp;месяц: ничего не&nbsp;спишется само, продлевать решаете сами.</p></div>
           </details>
           <details>
             <summary>Кто видит мои вопросы?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
@@ -607,11 +705,12 @@
       <p class="sheet-title" id="sheet-title" data-sheet-title>Войдите и&nbsp;спрашивайте</p>
       <p class="sheet-q" data-sheet-q hidden></p>
       <p class="sheet-text">20&nbsp;вопросов в&nbsp;месяц&nbsp;— бесплатно. Без карты, пароля и&nbsp;СМС.</p>
+      <p class="sheet-code-ok" data-code-ok hidden><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Код приглашения применён</p>
 
       <div class="sheet-code" data-invite-only>
         <label for="code">Код приглашения</label>
         <input id="code" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="32" placeholder="Введите код" aria-describedby="code-note" data-code>
-        <p class="sheet-code-note" id="code-note">Сейчас вход&nbsp;— по&nbsp;коду. Он есть в&nbsp;посте или сообщении, где вы узнали о&nbsp;Тилво.</p>
+        <p class="sheet-code-note" id="code-note">Код есть в&nbsp;посте, где вы узнали о&nbsp;Тилво. Нет кода? Напишите в&nbsp;<a href="https://max.ru/">Max</a>: <span class="nowrap">+7&nbsp;916&nbsp;611-30-50</span>&nbsp;— пришлём.</p>
       </div>
 
       <div class="providers">
@@ -640,7 +739,12 @@
       return CHAT_URL + '/?' + p.toString();
     }
 
-    if (!INVITE_ONLY) {
+    var params = new URLSearchParams(window.location.search);
+    var linkCode = normalize(params.get('code') || params.get('invite'));
+    // Код из ссылки в посте подставляется сам: такой гость видит страницу как при открытом входе
+    var codeFromLink = INVITE_ONLY && looksLikeCode(linkCode);
+
+    if (!INVITE_ONLY || codeFromLink) {
       document.querySelectorAll('[data-invite-only]').forEach(function (el) { el.remove(); });
       document.querySelectorAll('[data-open-text]').forEach(function (el) {
         var arrow = el.querySelector('svg');
@@ -648,6 +752,10 @@
         if (arrow) el.appendChild(arrow);
       });
       document.querySelectorAll('[data-step-num]').forEach(function (el) { el.textContent = '1'; });
+    }
+    if (codeFromLink) document.querySelector('[data-code-ok]').hidden = false;
+    if (INVITE_ONLY && !codeFromLink) {
+      document.querySelectorAll('[data-no-code-text]').forEach(function (el) { el.innerHTML = el.getAttribute('data-no-code-text'); });
     }
 
     var header = document.querySelector('[data-header]');
@@ -665,7 +773,7 @@
     var question = '';
 
     function updateLinks() {
-      var code = codeInput ? normalize(codeInput.value) : '';
+      var code = codeInput ? normalize(codeInput.value) : linkCode;
       var ok = !INVITE_ONLY || looksLikeCode(code);
       providers.forEach(function (a) {
         a.href = ok ? loginHref(a.getAttribute('data-provider'), code, question) : '#';
@@ -675,9 +783,10 @@
       if (codeHint) codeHint.hidden = ok;
     }
 
-    function openSheet(q) {
+    function openSheet(q, byVoice) {
       question = (q || '').trim();
-      sheetTitle.innerHTML = question ? 'Вопрос готов&nbsp;— войдите, чтобы получить ответ' : 'Войдите и&nbsp;спрашивайте';
+      sheetTitle.innerHTML = question ? 'Вопрос готов&nbsp;— войдите, чтобы получить ответ'
+        : byVoice ? 'Войдите&nbsp;— и&nbsp;спрашивайте голосом' : 'Войдите и&nbsp;спрашивайте';
       sheetQ.textContent = question;
       sheetQ.hidden = !question;
       updateLinks();
@@ -686,9 +795,7 @@
     }
 
     if (codeInput) {
-      var params = new URLSearchParams(window.location.search);
-      var fromLink = normalize(params.get('code') || params.get('invite'));
-      if (fromLink) codeInput.value = fromLink;
+      if (linkCode) codeInput.value = linkCode;
       codeInput.addEventListener('input', updateLinks);
     }
 
@@ -699,7 +806,7 @@
       e.preventDefault();
       openSheet(askInput.value);
     });
-    document.querySelector('[data-voice]').addEventListener('click', function () { openSheet(askInput.value); });
+    document.querySelector('[data-voice]').addEventListener('click', function () { openSheet(askInput.value, true); });
     document.querySelectorAll('[data-fill]').forEach(function (b) {
       b.addEventListener('click', function () { askInput.value = b.getAttribute('data-fill'); askInput.focus(); });
     });
@@ -708,6 +815,9 @@
     });
     document.querySelectorAll('[data-login]').forEach(function (b) {
       b.addEventListener('click', function () { openSheet(''); });
+    });
+    document.querySelectorAll('[data-open-faq]').forEach(function (a) {
+      a.addEventListener('click', function () { document.querySelector(a.getAttribute('href')).open = true; });
     });
   })();
   </script>
