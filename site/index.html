@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="only light">
   <title>Тилво — спросите GPT бесплатно, без VPN и карты</title>
-  <meta name="description" content="Простой чат с GPT на русском: объяснит анализы, сравнит покупки, напишет письмо. Можно голосом. 20 вопросов в месяц бесплатно, без карты и VPN.">
+  <meta name="description" content="Простой чат с GPT на русском: объяснит анализы, сравнит покупки, напишет письмо. Можно голосом. До 230 вопросов в месяц бесплатно, без карты и VPN.">
   <meta property="og:title" content="Тилво — спросите GPT бесплатно, без VPN и карты">
-  <meta property="og:description" content="Простой чат с GPT на русском. Можно голосом. 20 вопросов в месяц бесплатно.">
+  <meta property="og:description" content="Простой чат с GPT на русском. Можно голосом. До 230 вопросов в месяц бесплатно.">
   <meta property="og:type" content="website">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%231F5C4D'/%3E%3Cg transform='translate(32 32) scale(0.74) translate(-32 -32)'%3E%3Cpath fill='%23F6F3EC' d='M27 7.5C43 5 58.5 16.5 59.5 32C60.4 46.5 49.5 57 34 57C17.5 57 5 47.5 4.5 33C4 19.5 13 9.7 27 7.5ZM31 36A5.5 5.5 0 0 0 31 47L48.5 47A5.5 5.5 0 0 0 48.5 36Z'/%3E%3C/g%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -218,8 +218,13 @@
     .plan-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; margin-top: 6px; }
     .plan-price strong { font-family: var(--font-head); font-size: 42px; font-weight: 500; line-height: 1; }
     .plan-price span { color: var(--muted); }
-    .plan-price s { color: var(--faint); font-size: 18px; }
-    .plan-sale { margin-top: 8px; font-size: 14px; font-weight: 600; color: var(--accent); }
+    .plans-note { margin-top: 14px; max-width: 46em; font-size: 14px; color: var(--muted); line-height: 1.5; }
+    .plan-bill { margin-top: 6px; font-size: 14px; font-weight: 600; color: var(--accent); }
+    .billing { display: inline-flex; gap: 4px; margin-top: 22px; padding: 4px; background: var(--surface-2); border-radius: 999px; }
+    .billing button { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 18px; border: 0; border-radius: 999px; background: none; font-size: 15px; font-weight: 600; color: var(--ink-2); cursor: pointer; }
+    .billing button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px var(--shadow); }
+    .billing-save { padding: 2px 8px; border-radius: 999px; background: var(--highlight-soft); font-size: 13px; }
+    .billing button:focus-visible { outline: 3px solid var(--highlight); outline-offset: 2px; }
     .plan ul { display: grid; gap: 10px; margin: 18px 0 22px; }
     .plan li { display: flex; gap: 10px; align-items: flex-start; font-size: 16px; line-height: 1.45; }
     .plan li .ico { width: 18px; height: 18px; color: var(--accent); stroke-width: 2.4; margin-top: 2px; }
@@ -386,7 +391,7 @@
             <button class="chip" type="button" data-fill="Помоги сыну разобраться с дробями, но не решай за него">Помоги с уроками</button>
           </div>
           <button class="btn btn-primary" type="submit">Задать вопрос бесплатно<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></button>
-          <p class="ask-note" data-no-code-text="<b>20&nbsp;вопросов в&nbsp;месяц бесплатно.</b> Вход по&nbsp;коду из&nbsp;поста&nbsp;— через Яндекс&nbsp;ID или VK&nbsp;ID, без карты и&nbsp;СМС."><b>20&nbsp;вопросов в&nbsp;месяц бесплатно.</b> Без карты и&nbsp;СМС&nbsp;— вход через Яндекс&nbsp;ID или VK&nbsp;ID.</p>
+          <p class="ask-note" data-no-code-text="<b>До&nbsp;230&nbsp;вопросов в&nbsp;месяц бесплатно.</b> Вход по&nbsp;коду из&nbsp;поста&nbsp;— через Яндекс&nbsp;ID или VK&nbsp;ID, без карты и&nbsp;СМС."><b>До&nbsp;230&nbsp;вопросов в&nbsp;месяц бесплатно.</b> Без карты и&nbsp;СМС&nbsp;— вход через Яндекс&nbsp;ID или VK&nbsp;ID.</p>
         </form>
       </div>
     </section>
@@ -534,7 +539,10 @@
       <div class="container">
         <p class="eyebrow">Сколько стоит</p>
         <h2 class="h2" id="price-title">Начните бесплатно. Платите, только если захочется больше</h2>
-        <p class="lead">Первым пользователям&nbsp;— −30% на&nbsp;любой тариф навсегда.</p>
+        <div class="billing" role="group" aria-label="Срок оплаты">
+          <button type="button" aria-pressed="true" data-months="1">1&nbsp;месяц</button>
+          <button type="button" aria-pressed="false" data-months="3">3&nbsp;месяца <span class="billing-save">−20%</span></button>
+        </div>
 
         <div class="plans">
           <article class="plan">
@@ -542,7 +550,7 @@
             <p class="plan-for">Чтобы попробовать</p>
             <p class="plan-price"><strong>0&nbsp;₽</strong></p>
             <ul>
-              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>20&nbsp;вопросов в&nbsp;месяц</li>
+              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>До&nbsp;230&nbsp;вопросов в&nbsp;месяц к&nbsp;GPT‑6&nbsp;Luna или 92 к&nbsp;Claude Haiku&nbsp;5.5</li>
               <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Полноценные ответы&nbsp;— с&nbsp;первого вопроса</li>
               <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Текстом и&nbsp;голосом, можно прислать фото</li>
               <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Без карты: только вход через Яндекс&nbsp;ID или VK&nbsp;ID</li>
@@ -550,45 +558,49 @@
             <button class="btn btn-ghost" type="button" data-login>Начать бесплатно</button>
           </article>
 
-          <article class="plan plan-main">
-            <span class="plan-flag">Меньше 25&nbsp;₽ в&nbsp;день</span>
+          <article class="plan plan-main" data-price="990">
+            <span class="plan-flag">Меньше 35&nbsp;₽ в&nbsp;день</span>
             <p class="plan-name">«Плюс»</p>
             <p class="plan-for">Для себя и&nbsp;семьи</p>
-            <p class="plan-price"><strong>693&nbsp;₽</strong><span>в&nbsp;месяц</span><s>990&nbsp;₽</s></p>
+            <p class="plan-price"><strong data-month-price>990&nbsp;₽</strong><span>в&nbsp;месяц</span></p>
+            <p class="plan-bill" data-bill hidden></p>
             <ul>
-              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Вопросов хватит на&nbsp;каждый день</li>
+              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>До&nbsp;2&nbsp;300&nbsp;вопросов в&nbsp;месяц к&nbsp;GPT‑6&nbsp;Luna&nbsp;— или 140 к&nbsp;GPT‑6.1&nbsp;Sol, 46 к&nbsp;Claude Sonnet&nbsp;5.5</li>
+              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>4&nbsp;глубоких исследования в&nbsp;месяц: изучит десятки сайтов и&nbsp;соберёт отчёт</li>
               <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Помнит вас и&nbsp;хранит историю чатов</li>
               <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Голос, фото, документы и&nbsp;файлы</li>
               <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Ищет в&nbsp;интернете свежие цены, новости и&nbsp;отзывы</li>
-              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>4&nbsp;глубоких исследования в&nbsp;месяц: изучит десятки сайтов и&nbsp;соберёт отчёт</li>
             </ul>
             <button class="btn btn-primary" type="button" data-login>Начать бесплатно</button>
           </article>
 
-          <article class="plan">
+          <article class="plan" data-price="2490">
             <p class="plan-name">«Про»</p>
             <p class="plan-for">Если спрашиваете много: работа, учёба</p>
-            <p class="plan-price"><strong>1&nbsp;743&nbsp;₽</strong><span>в&nbsp;месяц</span><s>2&nbsp;490&nbsp;₽</s></p>
+            <p class="plan-price"><strong data-month-price>2&nbsp;490&nbsp;₽</strong><span>в&nbsp;месяц</span></p>
+            <p class="plan-bill" data-bill hidden></p>
             <ul>
-              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>В&nbsp;2,5&nbsp;раза больше вопросов, чем в&nbsp;«Плюсе»</li>
+              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>До&nbsp;5&nbsp;100&nbsp;вопросов в&nbsp;месяц к&nbsp;GPT‑6&nbsp;Luna&nbsp;— или 300 к&nbsp;GPT‑6.1&nbsp;Sol, 99 к&nbsp;Claude Sonnet&nbsp;5.5</li>
               <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>10&nbsp;глубоких исследований в&nbsp;месяц</li>
               <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Всё, что в&nbsp;«Плюсе»</li>
             </ul>
             <button class="btn btn-ghost" type="button" data-login>Начать бесплатно</button>
           </article>
 
-          <article class="plan">
+          <article class="plan" data-price="9900">
             <p class="plan-name">«Ультра»</p>
             <p class="plan-for">Для работы весь день</p>
-            <p class="plan-price"><strong>6&nbsp;930&nbsp;₽</strong><span>в&nbsp;месяц</span><s>9&nbsp;900&nbsp;₽</s></p>
+            <p class="plan-price"><strong data-month-price>9&nbsp;900&nbsp;₽</strong><span>в&nbsp;месяц</span></p>
+            <p class="plan-bill" data-bill hidden></p>
             <ul>
-              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>В&nbsp;10&nbsp;раз больше вопросов, чем в&nbsp;«Плюсе»</li>
+              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>До&nbsp;17&nbsp;700&nbsp;вопросов в&nbsp;месяц к&nbsp;GPT‑6&nbsp;Luna&nbsp;— или 1&nbsp;000 к&nbsp;GPT‑6.1&nbsp;Sol, 330 к&nbsp;Claude Sonnet&nbsp;5.5</li>
               <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>40&nbsp;глубоких исследований в&nbsp;месяц</li>
               <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Всё, что в&nbsp;«Плюсе»</li>
             </ul>
             <button class="btn btn-ghost" type="button" data-login>Начать бесплатно</button>
           </article>
         </div>
+        <p class="plans-note">Число вопросов&nbsp;— для вопроса средней длины: длинная переписка и&nbsp;большие файлы расходуют больше. Поиск в&nbsp;интернете лимит не&nbsp;тратит.</p>
 
         <ul class="trust">
           <li><svg class="ico" aria-hidden="true"><use href="#i-counter"/></svg>Без токенов и&nbsp;доплат: цена всегда одна</li>
@@ -629,7 +641,7 @@
             <span class="ladder-dot" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg></span>
             <div class="ladder-text">
               <h3>Вы в&nbsp;Тилво</h3>
-              <p class="ladder-sub">20&nbsp;вопросов в&nbsp;месяц бесплатно, без карты и&nbsp;VPN</p>
+              <p class="ladder-sub">До&nbsp;230&nbsp;вопросов в&nbsp;месяц бесплатно, без карты и&nbsp;VPN</p>
             </div>
           </li>
           <li class="ladder-step">
@@ -673,7 +685,7 @@
           </details>
           <details>
             <summary>Правда бесплатно? Где подвох?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-            <div class="faq-a"><p>Подвоха нет. 20&nbsp;вопросов в&nbsp;месяц&nbsp;— бесплатно, карту не&nbsp;просим, ничего не&nbsp;спишется. Для обычных вопросов этого хватает с&nbsp;запасом.</p><p>Захочется больше&nbsp;— подключите платный тариф. Это ваше решение, без автосписаний.</p></div>
+            <div class="faq-a"><p>Подвоха нет. До&nbsp;230&nbsp;вопросов в&nbsp;месяц&nbsp;— бесплатно, карту не&nbsp;просим, ничего не&nbsp;спишется. Для обычных вопросов этого хватает с&nbsp;запасом.</p><p>Захочется больше&nbsp;— подключите платный тариф. Это ваше решение, без автосписаний.</p></div>
           </details>
           <details>
             <summary>Нужен VPN или приложение?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
@@ -701,11 +713,11 @@
           </details>
           <details>
             <summary>Что будет, когда закончатся вопросы?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-            <div class="faq-a"><p>Новые 20&nbsp;вопросов придут через 30&nbsp;дней после первого&nbsp;— дата видна в&nbsp;чате. Или подключите «Плюс»: вопросов хватит на&nbsp;каждый день. Доплат за&nbsp;токены нет.</p></div>
+            <div class="faq-a"><p>Новые вопросы придут через 30&nbsp;дней после первого&nbsp;— дата видна в&nbsp;чате. Или подключите «Плюс»: в&nbsp;нём вопросов в&nbsp;10&nbsp;раз больше. Доплат за&nbsp;токены нет.</p></div>
           </details>
           <details>
             <summary>Как оплатить тариф?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-            <div class="faq-a"><p>По&nbsp;СБП: в&nbsp;чате появится QR-код&nbsp;— отсканируйте его в&nbsp;приложении своего банка. Зарубежная карта не&nbsp;нужна.</p><p>Платёж разовый, на&nbsp;месяц: ничего не&nbsp;спишется само, продлевать решаете сами.</p></div>
+            <div class="faq-a"><p>По&nbsp;СБП: в&nbsp;чате появится QR-код&nbsp;— отсканируйте его в&nbsp;приложении своего банка. Зарубежная карта не&nbsp;нужна.</p><p>Платёж разовый: за&nbsp;месяц или сразу за&nbsp;3&nbsp;месяца со&nbsp;скидкой 20%. Ничего не&nbsp;спишется само, продлевать решаете сами.</p></div>
           </details>
           <details>
             <summary>Кто видит мои вопросы?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
@@ -720,7 +732,7 @@
       <div class="container">
         <div class="final-box">
           <h2 id="final-title">Задайте первый вопрос&nbsp;— это бесплатно</h2>
-          <p>20&nbsp;вопросов в&nbsp;месяц без оплаты. От&nbsp;693&nbsp;₽ в&nbsp;месяц&nbsp;— когда захочется больше.</p>
+          <p>До&nbsp;230&nbsp;вопросов в&nbsp;месяц без оплаты. От&nbsp;990&nbsp;₽ в&nbsp;месяц&nbsp;— когда захочется больше.</p>
           <button class="btn" type="button" data-login>Задать вопрос бесплатно<svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></button>
         </div>
       </div>
@@ -741,7 +753,7 @@
       <button class="sheet-close" type="button" aria-label="Закрыть" data-close><svg class="ico" aria-hidden="true"><use href="#i-close"/></svg></button>
       <p class="sheet-title" id="sheet-title" data-sheet-title>Войдите и&nbsp;спрашивайте</p>
       <p class="sheet-q" data-sheet-q hidden></p>
-      <p class="sheet-text">20&nbsp;вопросов в&nbsp;месяц&nbsp;— бесплатно. Без карты, пароля и&nbsp;СМС.</p>
+      <p class="sheet-text">До&nbsp;230&nbsp;вопросов в&nbsp;месяц&nbsp;— бесплатно. Без карты, пароля и&nbsp;СМС.</p>
       <p class="sheet-code-ok" data-link-code hidden><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Код приглашения применён</p>
 
       <div class="sheet-code" data-invite-only>
@@ -852,6 +864,23 @@
     });
     document.querySelectorAll('[data-login]').forEach(function (b) {
       b.addEventListener('click', function () { openSheet(''); });
+    });
+    // Оплата за 3 месяца — скидка 20%: цена за месяц и итог за срок
+    function rub(n) { return n.toLocaleString('ru-RU') + ' ₽'; }
+    var billing = document.querySelectorAll('[data-months]');
+    billing.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var months = Number(b.getAttribute('data-months'));
+        billing.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        document.querySelectorAll('[data-price]').forEach(function (plan) {
+          var full = Number(plan.getAttribute('data-price'));
+          var perMonth = months === 3 ? Math.round(full * 0.8) : full;
+          var bill = plan.querySelector('[data-bill]');
+          plan.querySelector('[data-month-price]').textContent = rub(perMonth);
+          bill.textContent = rub(perMonth * 3) + ' за 3 месяца · экономия ' + rub((full - perMonth) * 3);
+          bill.hidden = months !== 3;
+        });
+      });
     });
     document.querySelectorAll('[data-open-faq]').forEach(function (a) {
       a.addEventListener('click', function () { document.querySelector(a.getAttribute('href')).open = true; });
