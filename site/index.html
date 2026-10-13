@@ -213,22 +213,35 @@
     .plan { position: relative; display: flex; flex-direction: column; padding: 24px 22px 22px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); }
     .plan-main { border: 2px solid var(--accent); }
     .plan-flag { position: absolute; top: -13px; left: 20px; padding: 3px 12px; border-radius: 999px; background: var(--highlight); color: var(--ink); font-size: 13px; font-weight: 600; }
-    .plan-name { font-size: 15px; font-weight: 600; color: var(--muted); }
-    .plan-for { margin-top: 2px; font-size: 15px; color: var(--ink-2); }
-    .plan-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; margin-top: 6px; }
+    .plan-name { font-family: var(--font-head); font-size: 28px; font-weight: 500; line-height: 1.15; color: var(--ink); }
+    .plan-for { margin-top: 6px; font-size: 15px; line-height: 1.45; color: var(--muted); }
+    .plan-cost { margin-top: 14px; }
+    @media (min-width: 720px) { .plan-for { min-height: 2.9em; } .plan-cost { min-height: 70px; } }
+    .plan-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; }
     .plan-price strong { font-family: var(--font-head); font-size: 42px; font-weight: 500; line-height: 1; }
     .plan-price span { color: var(--muted); }
-    .plans-note { margin-top: 14px; max-width: 46em; font-size: 14px; color: var(--muted); line-height: 1.5; }
     .plan-bill { margin-top: 6px; font-size: 14px; font-weight: 600; color: var(--accent); }
     .billing { display: inline-flex; gap: 4px; margin-top: 22px; padding: 4px; background: var(--surface-2); border-radius: 999px; }
     .billing button { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 18px; border: 0; border-radius: 999px; background: none; font-size: 15px; font-weight: 600; color: var(--ink-2); cursor: pointer; }
     .billing button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px var(--shadow); }
     .billing-save { padding: 2px 8px; border-radius: 999px; background: var(--highlight-soft); font-size: 13px; }
     .billing button:focus-visible { outline: 3px solid var(--highlight); outline-offset: 2px; }
-    .plan ul { display: grid; gap: 10px; margin: 18px 0 22px; }
+    .plan-body { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--line); }
+    .plan-inc { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 12px; font-size: 15.5px; font-weight: 600; line-height: 1.4; }
+    .plan-inc .ico { width: 18px; height: 18px; color: var(--accent); margin-top: 2px; }
+    .plan ul { display: grid; gap: 10px; }
     .plan li { display: flex; gap: 10px; align-items: flex-start; font-size: 16px; line-height: 1.45; }
     .plan li .ico { width: 18px; height: 18px; color: var(--accent); stroke-width: 2.4; margin-top: 2px; }
-    .plan .btn { margin-top: auto; width: 100%; }
+    .plan .btn { margin-top: 16px; width: 100%; }
+    .plan-fine { margin-top: auto; padding-top: 22px; font-size: 13px; line-height: 1.45; color: var(--muted); }
+    .plan-fine a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+    /* Строки карточек (название, цена, кнопка, список) выравниваются между карточками */
+    @supports (grid-template-rows: subgrid) {
+      @media (min-width: 720px) {
+        .plan { display: grid; grid-row: span 6; grid-template-rows: subgrid; row-gap: 0; }
+        .plan-for, .plan-cost { min-height: 0; }
+      }
+    }
     .trust { display: grid; gap: 10px 24px; margin-top: 28px; max-width: 880px; }
     @media (min-width: 760px) { .trust { grid-template-columns: 1fr 1fr; } }
     .trust li { display: flex; gap: 10px; align-items: center; font-size: 15.5px; color: var(--ink-2); }
@@ -342,6 +355,7 @@
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <symbol id="i-logo" viewBox="0 0 64 64"><path d="M27 7.5C43 5 58.5 16.5 59.5 32C60.4 46.5 49.5 57 34 57C17.5 57 5 47.5 4.5 33C4 19.5 13 9.7 27 7.5ZM31 36A5.5 5.5 0 0 0 31 47L48.5 47A5.5 5.5 0 0 0 48.5 36Z"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3.5l1.9 5.6 5.6 1.9-5.6 1.9L12 18.5l-1.9-5.6L4.5 11l5.6-1.9z"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 20 20"><path d="M4 10h11M11 5.5 15.5 10 11 14.5"/></symbol>
     <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
     <symbol id="i-close" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></symbol>
@@ -547,54 +561,79 @@
         <div class="plans">
           <article class="plan">
             <p class="plan-name">Бесплатно</p>
-            <p class="plan-for">Чтобы попробовать</p>
-            <p class="plan-price"><strong>0&nbsp;₽</strong></p>
-            <ul>
-              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Распознавание фото и&nbsp;скриншотов&nbsp;— до&nbsp;27 в&nbsp;месяц</li>
-              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Генерация изображений&nbsp;— до&nbsp;5 в&nbsp;месяц</li>
-              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Текстом и&nbsp;голосом</li>
-              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Без карты: только вход через Яндекс&nbsp;ID или VK&nbsp;ID</li>
-            </ul>
+            <p class="plan-for">Чтобы познакомиться с&nbsp;Тилво</p>
+            <div class="plan-cost">
+              <p class="plan-price"><strong>0&nbsp;₽</strong><span>в&nbsp;месяц</span></p>
+            </div>
             <button class="btn btn-ghost" type="button" data-login>Начать бесплатно</button>
+            <div class="plan-body">
+              <ul>
+                <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>GPT и&nbsp;Claude на&nbsp;русском</span></li>
+                <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>Вопросы текстом и&nbsp;голосом</span></li>
+                <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>Поиск в&nbsp;интернете</span></li>
+                <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>Распознавание фото и&nbsp;скриншотов&nbsp;— до&nbsp;27 в&nbsp;месяц</span></li>
+                <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>Генерация изображений&nbsp;— до&nbsp;5 в&nbsp;месяц</span></li>
+                <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>Без карты: вход через Яндекс&nbsp;ID или VK&nbsp;ID</span></li>
+              </ul>
+            </div>
+            <p class="plan-fine">Действуют лимиты. <a href="#faq-limit" data-open-faq>Как они считаются</a></p>
           </article>
 
           <article class="plan plan-main" data-price="990">
             <span class="plan-flag">Меньше 35&nbsp;₽ в&nbsp;день</span>
             <p class="plan-name">«Плюс»</p>
-            <p class="plan-for">Для себя и&nbsp;семьи</p>
-            <p class="plan-price"><strong data-month-price>990&nbsp;₽</strong><span>в&nbsp;месяц</span></p>
-            <p class="plan-bill" data-bill hidden></p>
-            <ul>
-              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Распознавание фото и&nbsp;скриншотов&nbsp;— до&nbsp;51 в&nbsp;месяц</li>
-              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Генерация изображений&nbsp;— до&nbsp;20 в&nbsp;месяц</li>
-              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Глубокие исследования: изучит десятки сайтов и&nbsp;соберёт отчёт&nbsp;— 2&nbsp;в&nbsp;месяц</li>
-            </ul>
+            <p class="plan-for">Для себя и&nbsp;семьи: вопросы каждый день</p>
+            <div class="plan-cost">
+              <p class="plan-price"><strong data-month-price>990&nbsp;₽</strong><span>в&nbsp;месяц</span></p>
+              <p class="plan-bill" data-bill hidden></p>
+            </div>
             <button class="btn btn-primary" type="button" data-login>Начать бесплатно</button>
+            <div class="plan-body">
+              <p class="plan-inc"><svg class="ico" aria-hidden="true"><use href="#i-spark"/></svg>Всё, что в&nbsp;бесплатном, а&nbsp;также:</p>
+              <ul>
+                <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>Больше вопросов и&nbsp;документов</span></li>
+                <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>Распознавание фото и&nbsp;скриншотов&nbsp;— до&nbsp;51 в&nbsp;месяц</span></li>
+                <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>Генерация изображений&nbsp;— до&nbsp;20 в&nbsp;месяц</span></li>
+                <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>Глубокие исследования&nbsp;— 2&nbsp;в&nbsp;месяц</span></li>
+              </ul>
+            </div>
+            <p class="plan-fine">Действуют лимиты. <a href="#faq-limit" data-open-faq>Как они считаются</a></p>
           </article>
 
           <article class="plan" data-price="2490">
             <p class="plan-name">«Про»</p>
             <p class="plan-for">Если спрашиваете много: работа, учёба</p>
-            <p class="plan-price"><strong data-month-price>2&nbsp;490&nbsp;₽</strong><span>в&nbsp;месяц</span></p>
-            <p class="plan-bill" data-bill hidden></p>
-            <ul>
-              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><b>В&nbsp;5&nbsp;раз больше лимитов</b>, чем в&nbsp;«Плюсе»</li>
-            </ul>
+            <div class="plan-cost">
+              <p class="plan-price"><strong data-month-price>2&nbsp;490&nbsp;₽</strong><span>в&nbsp;месяц</span></p>
+              <p class="plan-bill" data-bill hidden></p>
+            </div>
             <button class="btn btn-ghost" type="button" data-login>Начать бесплатно</button>
+            <div class="plan-body">
+              <p class="plan-inc"><svg class="ico" aria-hidden="true"><use href="#i-spark"/></svg>Всё, что в&nbsp;«Плюсе», а&nbsp;также:</p>
+              <ul>
+                <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span><b>В&nbsp;5&nbsp;раз больше лимитов</b>, чем в&nbsp;«Плюсе»</span></li>
+              </ul>
+            </div>
+            <p class="plan-fine">Действуют лимиты. <a href="#faq-limit" data-open-faq>Как они считаются</a></p>
           </article>
 
           <article class="plan" data-price="9900">
             <p class="plan-name">«Ультра»</p>
             <p class="plan-for">Для работы весь день</p>
-            <p class="plan-price"><strong data-month-price>9&nbsp;900&nbsp;₽</strong><span>в&nbsp;месяц</span></p>
-            <p class="plan-bill" data-bill hidden></p>
-            <ul>
-              <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><b>В&nbsp;20&nbsp;раз больше лимитов</b>, чем в&nbsp;«Плюсе»</li>
-            </ul>
+            <div class="plan-cost">
+              <p class="plan-price"><strong data-month-price>9&nbsp;900&nbsp;₽</strong><span>в&nbsp;месяц</span></p>
+              <p class="plan-bill" data-bill hidden></p>
+            </div>
             <button class="btn btn-ghost" type="button" data-login>Начать бесплатно</button>
+            <div class="plan-body">
+              <p class="plan-inc"><svg class="ico" aria-hidden="true"><use href="#i-spark"/></svg>Всё, что в&nbsp;«Плюсе», а&nbsp;также:</p>
+              <ul>
+                <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span><b>В&nbsp;20&nbsp;раз больше лимитов</b>, чем в&nbsp;«Плюсе»</span></li>
+              </ul>
+            </div>
+            <p class="plan-fine">Действуют лимиты. <a href="#faq-limit" data-open-faq>Как они считаются</a></p>
           </article>
         </div>
-        <p class="plans-note">Вопросы и&nbsp;фото тратят общий лимит на&nbsp;месяц: число фото&nbsp;— если тратить лимит только на&nbsp;них. Генерация изображений и&nbsp;глубокие исследования считаются отдельно.</p>
 
         <ul class="trust">
           <li><svg class="ico" aria-hidden="true"><use href="#i-counter"/></svg>Без токенов и&nbsp;доплат: цена всегда одна</li>
@@ -701,9 +740,9 @@
             <summary>Нужен код приглашения?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
             <div class="faq-a"><p>Сейчас вход&nbsp;— по&nbsp;коду приглашения. Он есть в&nbsp;посте или сообщении, где вы узнали о&nbsp;Тилво. Код можно передать близким.</p></div>
           </details>
-          <details>
+          <details id="faq-limit">
             <summary>Как считается лимит?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-            <div class="faq-a"><p>Лимит на&nbsp;месяц общий: тексты, фото и&nbsp;документы расходуют его по-разному, поэтому в&nbsp;тарифах написано «до». Остаток видно в&nbsp;чате. Ответ не&nbsp;оборвётся на&nbsp;середине, а&nbsp;поиск в&nbsp;интернете лимит не&nbsp;тратит.</p></div>
+            <div class="faq-a"><p>Вопросы, фото и&nbsp;документы тратят общий лимит на&nbsp;месяц, но&nbsp;по-разному. Поэтому в&nbsp;тарифах написано «до»: столько фото, если тратить лимит только на&nbsp;них. Генерация изображений и&nbsp;глубокие исследования считаются отдельно.</p><p>Остаток видно в&nbsp;чате. Ответ не&nbsp;оборвётся на&nbsp;середине, а&nbsp;поиск в&nbsp;интернете лимит не&nbsp;тратит.</p></div>
           </details>
           <details>
             <summary>Что будет, когда закончится лимит?<svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></summary>
